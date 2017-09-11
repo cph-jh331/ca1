@@ -2,9 +2,10 @@ package main;
 
 import entity.Address;
 import entity.CityInfo;
-import entity.InfoEntity;
+import entity.Company;
 import entity.Person;
-import entityFacades.EntityFacade;
+import entityFacades.CompanyFacade;
+import entityFacades.PersonFacade;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,8 +17,8 @@ public class PopulatePerson {
     {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("devPU");
         EntityManager em = emf.createEntityManager();
-        EntityFacade facade = new EntityFacade(emf);
-        Person p = new Person("bob", "bobsen", null, "bob@bob.dk", null, null);
+        PersonFacade facade = new PersonFacade(emf);
+        Person p = new Person("bob", "bobsen", "bob@bob.dk");
         facade.addPerson(p);
         // We retrieve the cityInfo from the database:
         CityInfo ci = em.find(CityInfo.class, "0800");
@@ -26,15 +27,29 @@ public class PopulatePerson {
         // we add the address to the cityInfo list
         ci.addAddress(adr);
         p.setAddress(adr);
-        
+
         em.getTransaction().begin();
         em.merge(p);
         em.getTransaction().commit();
         em.close();
-        
-        facade.getPersons("3333");
-        
-        
+        em = emf.createEntityManager();
+        List<Person> ps = facade.getPersons("0800");
+        for (Person p1 : ps)
+        {
+            System.out.println(p1.getFirstName());
+        }
+
+        p = new Person("Hans", "Hansen", "hans@hansen.dk");
+        p = facade.addPerson(p);
+        ci = em.find(CityInfo.class, "0900");
+        adr = new Address("Hansvej", "5. tv", ci);
+        ci.addAddress(adr);
+        p.setAddress(adr);
+        p = facade.editPerson(p);
+        em.close();
+        CompanyFacade cf = new CompanyFacade(emf);
+        Company com = new Company("PelsCO", "Sælger pels", 33004433, 40, 2342500.43, "pels@pelsco.dk");
+        cf.addCompany(com);        
 
         //InfoEntity ie = new Person(firstName, lastName, hobby, email, phone, address)
     }

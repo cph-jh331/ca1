@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,7 +15,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -28,8 +28,11 @@ import javax.persistence.OneToMany;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries(
         {
-            @NamedQuery(name = "InfoEntity.findAllPerson", query = "SELECT p FROM Person p")
-            ,@NamedQuery(name = "InfoEntity.findAllByZipcode", query = "SELECT p FROM Person p JOIN FETCH p.address a WHERE a.cityinfo_zip = :0800")
+            @NamedQuery(name = "InfoEntity.findAllPersons", query = "SELECT p FROM Person p")
+            ,@NamedQuery(name = "InfoEntity.findPersonsByZip", query = "SELECT p FROM Person p WHERE p.address.cityInfo.zip =:zipcode")
+        //vi henter alle personerne fra person hvor vi chainer os over til postnummeret...s
+            ,@NamedQuery(name = "InfoEntity.findAllCompanies", query = "SELECT c FROM Company c")
+            ,@NamedQuery(name = "InfoEntity.findCompWithCVR", query = "SELECT c FROM Company c where c.cvr = :cvr")
         })
 public abstract class InfoEntity implements Serializable {
 
@@ -41,7 +44,7 @@ public abstract class InfoEntity implements Serializable {
     private String email;
 
     @OneToMany(mappedBy = "infoEntity")
-    private List<Phone> phone;
+    private List<Phone> phones;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
@@ -50,11 +53,22 @@ public abstract class InfoEntity implements Serializable {
     {
     }
 
-    public InfoEntity(String email, List<Phone> phone, Address address)
+    public InfoEntity(String email)
     {
         this.email = email;
-        this.phone = phone;
+        this.phones = new ArrayList<>();
+    }
+
+    public InfoEntity(String email, List<Phone> phones, Address address)
+    {
+        this.email = email;
+        this.phones = phones;
         this.address = address;
+    }
+
+    public boolean addPhone(Phone phone)
+    {
+        return phones.add(phone);
     }
 
     public Long getId()
@@ -77,14 +91,14 @@ public abstract class InfoEntity implements Serializable {
         this.email = email;
     }
 
-    public List<Phone> getPhone()
+    public List<Phone> getPhones()
     {
-        return phone;
+        return phones;
     }
 
-    public void setPhone(List<Phone> phone)
+    public void setPhones(List<Phone> phones)
     {
-        this.phone = phone;
+        this.phones = phones;
     }
 
     public Address getAddress()

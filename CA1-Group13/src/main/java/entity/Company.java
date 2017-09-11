@@ -6,7 +6,7 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 /**
@@ -18,6 +18,7 @@ public class Company extends InfoEntity implements Serializable {
 
     private String name;
     private String description;
+    @Column(unique = true)
     private long cvr;
     private int numEmployees;
     private double marketValue;
@@ -26,9 +27,9 @@ public class Company extends InfoEntity implements Serializable {
     {
     }
 
-    public Company(String name, String description, long cvr, int numEmployees, double marketValue, String email, List<Phone> phone, Address address)
+    public Company(String name, String description, long cvr, int numEmployees, double marketValue, String email)
     {
-        super(email, phone, address);
+        super(email);
         this.name = name;
         this.description = description;
         this.cvr = cvr;

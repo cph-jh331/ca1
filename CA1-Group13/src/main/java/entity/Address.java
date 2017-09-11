@@ -29,33 +29,28 @@ public class Address implements Serializable {
     private Long id;
     private String street;
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
-    private List<InfoEntity> infoEntity;
+    private List<InfoEntity> infoEntities;
     private String additional;
     @ManyToOne(cascade = CascadeType.ALL)
     private CityInfo cityInfo;
 
     public Address()
     {
+        this.infoEntities = new ArrayList<>();
     }
 
     public Address(String street, String additional, CityInfo cityInfo)
     {
         this.street = street;
-        this.infoEntity = new ArrayList<>();
+        this.infoEntities = new ArrayList<>();
         this.additional = additional;
         this.cityInfo = cityInfo;
     }
 
     public boolean AddInfoEntityToList(InfoEntity infoEntity)
     {
-        return this.infoEntity.add(infoEntity);
+        return this.infoEntities.add(infoEntity);
     }
-    public boolean AddInfoEntityToList(Person person)
-    {
-        return this.infoEntity.add(person);
-    }
-    
-   
 
     public Long getId()
     {
@@ -77,14 +72,14 @@ public class Address implements Serializable {
         this.street = street;
     }
 
-    public List<InfoEntity> getInfoEntity()
+    public List<InfoEntity> getInfoEntities()
     {
-        return infoEntity;
+        return infoEntities;
     }
 
-    public void setInfoEntity(List<InfoEntity> infoEntity)
+    public void setInfoEntities(List<InfoEntity> infoEntities)
     {
-        this.infoEntity = infoEntity;
+        this.infoEntities = infoEntities;
     }
 
     public CityInfo getCityInfo()
