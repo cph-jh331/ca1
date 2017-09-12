@@ -22,6 +22,8 @@ import javax.persistence.NamedQuery;
 @NamedQueries(
         {
             @NamedQuery(name = "Person.findAllPersons", query = "SELECT p FROM Person p")
+            ,@NamedQuery(name = "Person.findPersonByPhone", query = "SELECT DISTINCT p FROM Person p, IN(p.phones) t WHERE t.number = :phoneNumber")
+
         })
 public class Person extends InfoEntity implements Serializable {
 

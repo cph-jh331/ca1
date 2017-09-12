@@ -4,6 +4,7 @@ import entity.Address;
 import entity.CityInfo;
 import entity.Company;
 import entity.Person;
+import entity.Phone;
 import entityFacades.CompanyFacade;
 import entityFacades.PersonFacade;
 import java.util.List;
@@ -45,12 +46,23 @@ public class PopulatePerson {
         adr = new Address("Hansvej", "5. tv", ci);
         ci.addAddress(adr);
         p.setAddress(adr);
-        p = facade.editPerson(p);
+        facade.editPerson(p);
         em.close();
         CompanyFacade cf = new CompanyFacade(emf);
         Company com = new Company("PelsCO", "Sælger pels", 33004433, 40, 2342500.43, "pels@pelsco.dk");
-        cf.addCompany(com);        
+        cf.addCompany(com);
 
-        //InfoEntity ie = new Person(firstName, lastName, hobby, email, phone, address)
+        p = facade.getPerson(1);
+        Phone phone = new Phone("44885522", "home phone", p);
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        p.addPhone(phone);
+        em.merge(p);
+        em.getTransaction().commit();
+        em.close();
+
+        p = facade.getPerson(44885522L);
+        System.out.println(p.getFirstName());
+
     }
 }

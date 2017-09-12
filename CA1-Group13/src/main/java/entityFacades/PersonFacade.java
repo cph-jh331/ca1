@@ -1,5 +1,6 @@
 package entityFacades;
 
+import entity.Address;
 import entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -32,6 +33,23 @@ public class PersonFacade implements IPersonFacade {
             Person p = em.find(Person.class, lid);
             em.getTransaction().commit();
             return p;
+
+        } finally
+        {
+            em.close();
+        }
+    }
+
+    @Override
+    public Person getPerson(long phoneNumber)
+    {
+        String phone = "" + phoneNumber;
+        EntityManager em = getEntityManager();
+        try
+        {
+            Query q = em.createNamedQuery("Person.findPersonByPhone");
+            q.setParameter("phoneNumber", phone);
+            return (Person) q.getSingleResult();
 
         } finally
         {

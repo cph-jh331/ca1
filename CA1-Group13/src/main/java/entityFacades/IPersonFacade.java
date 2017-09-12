@@ -13,6 +13,7 @@ public interface IPersonFacade {
     public Person deletePerson(int id);
     public List<Person> getPersons();
     public List<Person> getPersons(String zipCode);
+    public Person getPerson(long phoneNumber);
     
     
 }

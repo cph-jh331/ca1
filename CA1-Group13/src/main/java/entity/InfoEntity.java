@@ -43,7 +43,7 @@ public abstract class InfoEntity implements Serializable {
 
     private String email;
 
-    @OneToMany(mappedBy = "infoEntity")
+    @OneToMany(mappedBy = "infoEntity", cascade = CascadeType.ALL)
     private List<Phone> phones;
 
     @ManyToOne(cascade = CascadeType.ALL)
