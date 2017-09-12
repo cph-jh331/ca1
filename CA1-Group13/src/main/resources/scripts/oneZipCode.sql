@@ -1,0 +1,2 @@
+INSERT INTO CITYINFO (ZIP, CITY) VALUES ('1003', 'København K');
+

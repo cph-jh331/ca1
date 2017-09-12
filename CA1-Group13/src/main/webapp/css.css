@@ -1,0 +1,717 @@
+@import url("../accounts/css/accounts.css");
+@import url("../catalog/css/catalog.css");
+
+:focus
+{
+  -moz-outline-style  :  none;
+}
+
+body
+{
+  margin      :  0px;
+  background  :  #dddddd;
+  font-family :  "Open Sans", Arial, sans-serif;
+}
+
+table
+{
+  border-collapse  :  collapse;
+  border-spacing   :  0;
+  table-layout     :  fixed;
+
+  font-size        :  11px;
+  color            :  #333333;
+
+  text-align       :  justify;
+}
+
+
+
+form
+{
+  margin  :  0px;
+}
+
+input.button
+{
+  font-size    :  12px;
+  font-weight  :  bold;
+  color        :  #333333;
+
+  text-align   :  center;
+  padding      :  1px 8px 1px 8px;
+}
+
+input, select, textarea
+{
+  font-size    :  11px;
+  color        :  #333333;
+}
+
+select
+{
+   width  :  203px;
+}
+
+a
+{
+  font-size        :  11px;
+  color            :  #003476;
+
+  text-decoration  :  underline;
+}
+
+a:hover
+{
+  font-size        :  11px;
+  color            :  #000000;
+
+  text-decoration  :  none;
+}
+
+fieldset
+{
+  margin      :  15px;
+  text-align  :  left;
+}
+
+fieldset form
+{
+   width    :  100%;
+   padding  :  15px;
+}
+
+legend
+{
+  font-size       :  22px;
+  font-weight     :  normal;
+  color           :  #003476;
+
+  margin          :  0px 10px 0px 10px;
+  padding         :  0px 10px 0px 10px;
+  line-height     :  54px;
+}
+
+legend img
+{
+  margin-right  :  5px;
+}
+
+#MainTable
+{
+  width         :  1001px;
+  height        :  100%;
+  margin        :  0px auto 0px auto;
+  border-left   :  solid 1px #000000;
+  border-right  :  solid 1px #000000;
+  background    :  #ffffff;
+}
+
+#Header
+{
+  background  :  #ffffff url('../images/header-bg.jpg') repeat-x;
+  padding     :  30px 0px 0px 10px;
+  position    :  relative;
+}
+
+#Welcome
+{
+  position     :  absolute;
+  top          :  7px;
+  left         :  0px;
+  width        :  985px;
+  text-align   :  right;
+
+  font-size    :  11px;
+  color        :  #2ea3f2;
+}
+
+#Welcome a
+{
+  font-size        :  11px;
+  color            :  #2ea3f2;
+
+  text-decoration  :  none;
+}
+
+#Welcome a:hover
+{
+  font-size        :  11px;
+  color            :  #2ea3f2;
+
+  text-decoration  :  none;
+}
+
+#AdminArea
+{
+  position     :  absolute;
+  top          :  32px;
+  left         :  581px;
+
+  font-size    :  65px;
+  font-weight  :  bold;
+  color        :  #f6f6f6;
+}
+
+#Menu
+{
+  background    :  #FFFFFF url('../images/menu-bg.jpg');
+  height        :  33px;
+  padding-left  :  1px !important;
+  padding-left  :  0px;
+}
+
+#Menu a
+{
+  font-size        :  12px;
+  font-weight      :  bold;
+  color            :  #333333;
+
+  text-decoration  :  none;
+  display          :  block;
+  line-height      :  21px;
+  margin           :  2px 2px 2px 2px !important;
+  margin           :  0px 2px 2px 2px;
+  padding          :  0px 10px 0px 10px;
+  border           :  solid 0px #034064;
+  background       :  #FFFFFF;
+  float            :  right;
+}
+
+#Menu a:hover
+{
+  font-size        :  12px;
+  font-weight      :  bold;
+  color            :  #22b14c;
+
+  text-decoration  :  none;
+  display          :  block;
+  line-height      :  21px;
+  margin           :  2px 2px 2px 2px !important;
+  margin           :  0px 2px 2px 2px;
+  padding          :  0px 10px 0px 10px;
+  border           :  solid 0px #000000;
+  background       :  #FFFFFF;
+  float            :  right;
+}
+
+#MainLinks
+{
+  display        :  block;
+  width          :  auto;
+  background     :  #FFFFFF;
+  padding        :  3px 0px 0px 1px !important;
+  padding        :  0px;
+  border-bottom  :  solid 1px #ffffff;
+  height         :  25px !important;
+  line-height    :  25px !important;
+  height         :  28px;
+  line-height    :  28px;
+
+  font-weight    :  bold;
+  font-size      :  12px;
+  color          :  #333333;
+}
+
+#MainLinks a
+{
+  font-weight      :  bold;
+  font-size        :  12px;
+  color            :  #444444;
+
+  text-decoration  :  none;
+  display          :  block;
+  line-height      :  20px;
+  margin           :  0px 2px 0px 2px;
+  padding          :  0px 10px 0px 10px;
+  float            :  right;
+}
+
+#MainLinks a:hover
+{
+  font-weight      :  bold;
+  font-size        :  12px;
+  color            :  #000000;
+
+  text-decoration  :  none;
+  display          :  block;
+  line-height      :  20px;
+  margin           :  0px 2px 0px 2px;
+  padding          :  0px 10px 0px 10px;
+  color            :  #22b14c;
+  float            :  right;
+}
+
+#QuickLinks
+{
+  display        :  block;
+  /*background     :  #cccccc;*/
+  padding        :  4px 0px 4px 0px;
+  /*border-top     :  solid 1px #ffffff;*/
+  border-bottom  :  solid 1px #777777;
+  font-size      :  12px;
+  color          :  #444444;
+  text-align     :  right;
+}
+
+#QuickLinks a
+{
+  font-size        :  12px;
+  color            :  #444444;
+  text-decoration  :  none;
+  padding          :  0 10px
+}
+
+#QuickLinks a:hover
+{
+  font-size        :  12px;
+  color            :  #153674;
+
+  text-decoration  :  none;
+}
+
+#Footer
+{
+  font-size     :  12px;
+  color         :  #fff;
+
+  padding       :  9px 10px 9px 5px;
+  background    :  #415762 url('../images/footer-bg.jpg');
+}
+
+#Footer table
+{
+  color         :  #fff;
+  margin        :  20px 5px;
+}
+
+#Footer a {
+	color		    : #b4b4b5;
+	text-decoration : none;
+}
+
+#Footer a:hover {
+	color		    : #22b14c;
+}
+#Alert
+{
+  margin-bottom  :  1px;
+  border-bottom  :  solid 1px #ffcd00;
+  background     :  #f2edc2;
+  padding        :  5px;
+  font-size      :  13px;
+  font-weight    :  bold;
+  color          :  #444444;
+}
+
+#Error
+{
+  border-bottom  :  solid 2px #000000;
+  background     :  #ec4444;
+  padding        :  5px;
+  font-size      :  13px;
+  font-weight    :  bold;
+  color          :  #ffffff;
+}
+
+fieldset h1
+{
+  font-size       :  13px;
+  font-weight     :  bold;
+  color           :  #666666;
+
+  margin          :  0px;
+  padding         :  2px 0px 3px 5px;
+  text-transform  :  capitalize;
+  background      :  #cccccc;
+}
+
+fieldset h2
+{
+  font-size       :  13px;
+  font-weight     :  bold;
+  color           :  #444444;
+
+  margin          :  0px 5% 5px 0px;
+  padding         :  0px 0px 2px 0px;
+  text-transform  :  capitalize;
+  border-bottom   :  solid 2px #aaaaaa;
+}
+
+.mandatory
+{
+  font-weight  :  bold;
+  color        :  #ff0000;
+}
+
+#Login
+{
+  width       :  380px;
+  border      :  solid 1px #aaaaaa;
+  margin      :  87px auto 90px auto;
+  background  :  #f5f5f5;
+  text-align  :  left;
+}
+
+#ForgotPassword
+{
+  width       :  400px;
+  border      :  solid 1px #aaaaaa;
+  margin      :  102px auto 110px auto;
+  background  :  #f5f5f5;
+  text-align  :  left;
+}
+
+#AdminHome
+{
+  width   :  98%;
+  margin  :  0px auto 20px auto;
+}
+
+#AdminHome img
+{
+  margin-bottom  :  5px;
+}
+
+#AdminHome a
+{
+  font-size        :  13px;
+  font-weight      :  bold;
+  color            :  #153674;
+
+  text-decoration  :  none;
+}
+
+#AdminHome a:hover
+{
+  font-size        :  13px;
+  font-weight      :  bold;
+  color            :  #000000;
+
+  text-decoration  :  underline;
+}
+
+#AdminHome fieldset legend a
+{
+  font-size        :  18px;
+  font-weight      :  normal;
+  color            :  #003399;
+
+  text-decoration  :  none;
+}
+
+#AdminHome fieldset legend a:hover
+{
+  font-size        :  18px;
+  font-weight      :  normal;
+  color            :  #000000;
+
+  text-decoration  :  none;
+}
+
+.block
+{
+  cursor       :  pointer;
+  width        :  240px;
+  border       :  solid 1px #aaaaaa;
+  background   :  #f5f5f5;
+  text-align   :  left;
+
+  font-family  :  "trebuchet ms", geneva, sans-serif;
+  font-size    :  17px;
+}
+
+.block:hover, .block2
+{
+  background  :  #dddddd;
+  border      :  solid 1px #888888;
+
+  cursor       :  pointer;
+  width        :  240px;
+  text-align   :  left;
+
+  font-family  :  "trebuchet ms", geneva, sans-serif;
+  font-size    :  17px;
+}
+
+#Note
+{
+  margin       :  50px 0px 60px 0px;
+  border       :  solid 2px #888888;
+  background   :  #fafafa;
+  padding      :  50px;
+  font-size    :  48px;
+  color        :  #888888;
+  text-align   :  center;
+  line-height  :  60px;
+}
+
+#Paging
+{
+  font-size    :  13px;
+  font-weight  :  bold;
+  color        :  #222222;
+
+  background   :  #e6e6e6;
+  padding      :  5px;
+  border       :  solid 1px #aaaaaa;
+  text-align   :  left;
+  margin-top   :  10px;
+}
+
+#Paging a
+{
+  font-size        :  13px;
+  color            :  #555555;
+
+  text-decoration  :  underline;
+}
+
+#Paging a:hover
+{
+  font-size        :  13px;
+  color            :  #153674;
+
+  text-decoration  :  none;
+}
+
+#Paging big
+{
+  font-size    :  13px;
+  color        :  #153674;
+}
+
+#Paging table
+{
+  border  :  none;
+}
+
+#Paging input
+{
+  font-size       :  11px;
+  font-weight     :  bold;
+  color           :  #333333;
+
+  text-align      :  center;
+
+  width           :  70px;
+  padding-top     :  2px;
+  padding-bottom  :  2px;
+}
+
+#Paging select
+{
+  font-size    :  12px;
+  color        :  #333333;
+
+  width        :  75px;
+}
+
+#Sorting
+{
+  clear       :  both;
+  border      :  dotted 1px #999999;
+  text-align  :  right;
+  margin      :  0px 0px 25px 0px;
+  padding     :  0px;
+  background  :  #eeeeee;
+  height      :  28px;
+}
+
+#Sorting table
+{
+  border  :  none;
+}
+
+#Sorting form
+{
+  margin   :  0px;
+  padding  :  4px 4px 4px 8px;
+  width    :  99%;
+}
+
+#Sorting form select
+{
+  width  :  100px;
+}
+
+#Sorting form input.button
+{
+  width      :  52px !important;
+  width      :  54px;
+  font-size  :  11px;
+}
+
+#DeleteRecords
+{
+  text-align  :  right;
+  margin      :  8px 0px 25px 0px;
+}
+
+#Searching
+{
+  clear       :  both;
+  border      :  dotted 1px #999999;
+  text-align  :  left;
+  margin      :  0px 0px 5px 0px;
+  padding     :  0px;
+  background  :  #e0e0e0;
+  height      :  28px;
+}
+
+#Searching table
+{
+  border  :  none;
+}
+
+#Searching form
+{
+  margin   :  0px;
+  padding  :  4px 4px 4px 8px;
+  width    :  99%;
+}
+
+#Searching form #Keywords
+{
+  width        :  165px;
+  padding-top  :  2px !important;
+  padding-top  :  1px;
+}
+
+#Searching form input.button
+{
+  width      :  70px !important;
+  width      :  72px;
+  font-size  :  11px;
+}
+
+#Searching form select
+{
+  width  :  125px;
+}
+
+#Filtering
+{
+  clear       :  both;
+  border      :  dotted 1px #999999;
+  text-align  :  left;
+  margin      :  0px 0px 5px 0px;
+  padding     :  0px;
+  background  :  #eaeaea;
+  height      :  28px;
+}
+
+#Filtering table
+{
+  border  :  none;
+}
+
+#Filtering form
+{
+  margin   :  0px;
+  padding  :  4px 4px 4px 8px;
+  width    :  99%;
+}
+
+#Filtering form #Keywords
+{
+  width        :  165px;
+  padding-top  :  2px !important;
+  padding-top  :  1px;
+}
+
+#Filtering form input.button
+{
+  width      :  70px !important;
+  width      :  72px;
+  font-size  :  11px;
+}
+
+#Filtering form select
+{
+  width     :  125px;
+}
+
+#AdminHome #User,
+#AdminHome #LogSource
+ {
+  margin    :  5px auto 20px auto;
+  width     :  100%;
+}
+
+#AdminHome .block, #AdminHome .block:hover, #AdminHome .block2,
+#LogSource .block, #LogSource .block:hover, #LogSource .block2
+{
+  width        :  190px;
+}
+
+.g-recaptcha
+{
+  margin-left:30px;
+}
+
+.search{
+  width:25px;
+  margin:0px;
+}
+
+.searchbox{
+  position:relative;
+  min-width:16px;
+  width:0%;
+  height:16px;
+  float:right;
+  overflow:hidden;
+  -webkit-transition: width 0.3s;
+  -moz-transition: width 0.3s;
+  -ms-transition: width 0.3s;
+  -o-transition: width 0.3s;
+  transition: width 0.3s;
+}
+
+.searchbox-input{
+  top:0;
+  right:0;
+  border:0;
+  outline:0;
+  background:#f5f5f5;
+  width:100%;
+  height:16px;
+  margin:0;
+  padding:0px 5px;
+}
+.searchbox-input::-webkit-input-placeholder {
+  color: #999999;
+}
+.searchbox-input:-moz-placeholder {
+  color: #999999;
+}
+.searchbox-input::-moz-placeholder {
+  color: #999999;
+}
+.searchbox-input:-ms-input-placeholder {
+  color: #999999;
+}
+
+.searchbox-icon, .searchbox-submit{
+  width:16px;
+  height:16px;
+  display:block;
+  position:absolute;
+  top:0;
+  right:0;
+  padding:0;
+  margin:0;
+  border:0;
+  outline:0;
+  line-height:16px;
+  text-align:center;
+  cursor:pointer;
+}
+
+.searchbox-open{
+  width:200px;
+}
+.searchbox-open .searchbox-input{
+	background-color: #EEEEEE;
+}

@@ -5,7 +5,10 @@
  */
 package entityFacades;
 
+import entity.Address;
+import entity.CityInfo;
 import entity.Person;
+import entity.Phone;
 import java.util.HashMap;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
@@ -43,6 +46,12 @@ public class PersonFacadeTest {
         pf.addPerson(new Person("bob", "hansen", "Bob@Hop.dk"));
         pf.addPerson(new Person("Per", "Nielsen", "Per@dollar.dk"));
         pf.addPerson(new Person("Henrik", "Henningsen", "op@top.dk"));
+//        CityInfo ci = new CityInfo("HardZip", "9999");
+//        Address address = new Address("EnSted", "2. tv", ci);
+//        ci.addAddress(address);
+//        Person p = pf.getPerson(1);
+//        p.setAddress(address);
+//        pf.editPerson(p);
 
     }
 
@@ -69,17 +78,19 @@ public class PersonFacadeTest {
 //    /**
 //     * Test of getPerson method, of class PersonFacade.
 //     */
-//    @Test
-//    public void testGetPerson_long() {
-//        System.out.println("getPerson");
-//        long phoneNumber = 0L;
-//        PersonFacade instance = null;
-//        Person expResult = null;
-//        Person result = instance.getPerson(phoneNumber);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    @Test
+    public void testGetPersonByPhone() {
+        System.out.println("getPersonbyphone");
+        long phoneNumber = 44885522;
+        Person p = pf.getPerson(1);
+        Phone phone = new Phone("44885522", "home phone", p);
+          p.addPhone(phone);
+        p = pf.editPerson(p);
+        Person result = pf.getPerson(phoneNumber);
+        Person expResult = pf.getPerson(1);
+        assertEquals(expResult, result);
+     
+    }
     /**
      * Test of editPerson method, of class PersonFacade.
      */
@@ -91,21 +102,6 @@ public class PersonFacadeTest {
         Person person = new Person("frans", "hansen", "Bob@Hop.dk");
         assertEquals(editedPerson.getFirstName(), person.getFirstName());
 
-    }
-
-    /**
-     * Test of deletePerson method, of class PersonFacade.
-     */
-    @Test
-    public void testDeletePerson_int() {
-        System.out.println("deletePerson");
-        int id = 0;
-        PersonFacade instance = null;
-        Person expResult = null;
-        Person result = instance.deletePerson(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -121,33 +117,27 @@ public class PersonFacadeTest {
 
     }
 
+ 
     /**
-     * Test of getPersons method, of class PersonFacade.
+     * Test find persons by zip code.
      */
     @Test
-    public void testGetPersons_0args() {
-        System.out.println("getPersons");
-        PersonFacade instance = null;
-        List<Person> expResult = null;
-        List<Person> result = instance.getPersons();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    public void testGetPersonsByZip() {
+        System.out.println("getPersonsbyzip");
+        CityInfo ci = new CityInfo("9999","HardZip");
+        Address address = new Address("EnSted", "2. tv", ci);
+        ci.addAddress(address);
+        Person p = pf.getPerson(1);
+        p.setAddress(address);
+        p = pf.editPerson(p);
+        System.out.println(p.getAddress().getCityInfo().getZipCode());
 
-    /**
-     * Test of getPersons method, of class PersonFacade.
-     */
-    @Test
-    public void testGetPersons_String() {
-        System.out.println("getPersons");
-        String zipCode = "";
-        PersonFacade instance = null;
-        List<Person> expResult = null;
-        List<Person> result = instance.getPersons(zipCode);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String zipCode = "9999";
+
+        Person expResult = pf.getPerson(1);
+        List<Person> result = pf.getPersons(zipCode);
+        assertEquals(expResult.getFirstName(), result.get(0).getFirstName());
+
     }
 
     /**
