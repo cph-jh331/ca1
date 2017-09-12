@@ -11,6 +11,14 @@ public class PersonFacade implements IPersonFacade {
 
     private EntityManagerFactory emf;
 
+    public PersonFacade() {
+    }
+    
+    public void addEntityManagerFactory(EntityManagerFactory emf)
+    {
+        this.emf = emf;
+    }
+
     public PersonFacade(EntityManagerFactory emf)
     {
         this.emf = emf;
