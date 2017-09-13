@@ -74,9 +74,7 @@ public class PersonDetail {
         {
             p.addPhone(pd.getPhoneNumber(), pd.getDescription());
         }
-
         return p;
-
     }
 
     public void setFirstName(String firstName)

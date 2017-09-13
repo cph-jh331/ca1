@@ -10,7 +10,9 @@ import com.google.gson.GsonBuilder;
 import entity.Person;
 import entityFacades.PersonFacade;
 import exceptions.EmailAlreadyExistsException;
+import exceptions.NoPersonsAtZipcodeException;
 import exceptions.PersonNotFoundException;
+import exceptions.ZipCodeNotValidException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Persistence;
@@ -126,4 +128,31 @@ public class PersonResource {
                 .entity(gson.toJson(pd))
                 .build();
     }
+
+    @GET
+    @Path("zipcode/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPersonsByZip(@PathParam("id") String zipcode)
+    {
+        if (zipcode.length() > 4)
+        {
+            throw new ZipCodeNotValidException();
+
+        }
+        List<Person> pList = pf.getPersons(zipcode);
+        if (pList.isEmpty())
+        {
+            throw new NoPersonsAtZipcodeException();
+        }
+        List<PersonDetail> pdList = new ArrayList<>();
+        for (Person person : pList)
+        {
+            pdList.add(new PersonDetail(person));
+        }
+        return Response.status(Response.Status.ACCEPTED)
+                .entity(gson.toJson(pdList))
+                .build();
+
+    }
+
 }

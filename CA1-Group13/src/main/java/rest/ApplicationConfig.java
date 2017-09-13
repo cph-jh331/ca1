@@ -32,7 +32,9 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources)
     {
         resources.add(exceptions.exceptionmappers.EmailAlreadyExistsExceptionMapper.class);
+        resources.add(exceptions.exceptionmappers.NoPersonsAtZipcodeExceptionMapper.class);
         resources.add(exceptions.exceptionmappers.PersonNotFoundExceptionMapper.class);
+        resources.add(exceptions.exceptionmappers.ZipCodeNotValidExceptionMapper.class);
         resources.add(rest.PersonResource.class);
     }
     
