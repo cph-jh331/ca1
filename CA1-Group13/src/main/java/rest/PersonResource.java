@@ -117,7 +117,7 @@ public class PersonResource {
         Person p = pf.getPerson(id);
         if (p == null)
         {
-            System.out.println("meh");
+            throw new PersonNotFoundException();
         }
         PersonDetail pd = new PersonDetail(pf.deletePerson(p));
 
