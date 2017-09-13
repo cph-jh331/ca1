@@ -11,6 +11,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -18,6 +20,10 @@ import javax.persistence.OneToMany;
  * @author bloch
  */
 @Entity
+@NamedQueries(
+        {
+            @NamedQuery(name = "CityInfo.findAllCityInfo", query = "SELECT c FROM CityInfo c")
+        })
 public class CityInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
