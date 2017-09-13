@@ -1,19 +1,20 @@
 package entityFacades;
 
-import entity.Address;
 import entity.Person;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 public class PersonFacade implements IPersonFacade {
 
     private EntityManagerFactory emf;
 
-    public PersonFacade() {
+    public PersonFacade()
+    {
     }
-    
+
     public void addEntityManagerFactory(EntityManagerFactory emf)
     {
         this.emf = emf;
@@ -110,7 +111,7 @@ public class PersonFacade implements IPersonFacade {
         try
         {
             em.getTransaction().begin();
-            em.persist(p);
+            em.merge(p);
             em.getTransaction().commit();
             return p;
         } finally
@@ -122,11 +123,16 @@ public class PersonFacade implements IPersonFacade {
     @Override
     public List<Person> getPersons()
     {
+        List<Person> pList;
         EntityManager em = getEntityManager();
         try
         {
-            Query q = em.createNamedQuery("InfoEntity.findAllPersons");
-            return q.getResultList();
+            em.getTransaction().begin();
+            Query q = em.createNamedQuery("Person.findAllPersons");
+            pList = q.getResultList();
+            em.getTransaction().commit();
+            return pList;
+
         } finally
         {
             em.close();
@@ -159,10 +165,29 @@ public class PersonFacade implements IPersonFacade {
             if (p != null)
             {
                 em.getTransaction().begin();
-                em.remove(person);
+                em.remove(p);
                 em.getTransaction().commit();
                 return p;
             }
+            return p;
+        } finally
+        {
+            em.close();
+        }
+    }
+
+    @Override
+    public Person getByEmail(String email)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            Query q = em.createNamedQuery("Person.findPersonByEmail");
+            q.setParameter("email", email);
+            return (Person) q.getSingleResult();
+
+        } catch (NoResultException e)
+        {
             return null;
         } finally
         {

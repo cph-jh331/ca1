@@ -9,7 +9,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,8 +32,7 @@ import javax.persistence.OneToMany;
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries(
         {
-            @NamedQuery(name = "InfoEntity.findAllPersons", query = "SELECT p FROM Person p")
-            ,@NamedQuery(name = "InfoEntity.findPersonsByZip", query = "SELECT p FROM Person p WHERE p.address.cityInfo.zip =:zipcode")
+            @NamedQuery(name = "InfoEntity.findPersonsByZip", query = "SELECT p FROM Person p WHERE p.address.cityInfo.zip =:zipcode")
             //vi henter alle personerne fra person hvor vi chainer os over til postnummeret...s
             ,@NamedQuery(name = "InfoEntity.findAllCompanies", query = "SELECT c FROM Company c")
             ,@NamedQuery(name = "InfoEntity.findCompWithCVR", query = "SELECT c FROM Company c where c.cvr = :cvr")
@@ -41,81 +44,108 @@ public abstract class InfoEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String email;
 
     @OneToMany(mappedBy = "infoEntity", cascade = CascadeType.ALL)
-    private List<Phone> phones;
+    private List<Phone> phones = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    public InfoEntity() {
+    public InfoEntity()
+    {
     }
 
-    public InfoEntity(String email) {
+    public InfoEntity(String email)
+    {
         this.email = email;
-        this.phones = new ArrayList<>();
     }
 
-    public InfoEntity(String email, List<Phone> phones, Address address) {
+    public InfoEntity(String email, Address address)
+    {
+        this.email = email;
+        this.address = address;
+    }
+
+    public InfoEntity(String email, List<Phone> phones, Address address)
+    {
         this.email = email;
         this.phones = phones;
         this.address = address;
     }
 
-    public boolean addPhone(Phone phone) {
+    public boolean addPhone(Phone phone)
+    {
         return phones.add(phone);
     }
 
+    public boolean addPhone(String phoneNumber, String desc)
+    {
+        return phones.add(new Phone(phoneNumber, desc, this));
+    }
+
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object object)
+    {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof InfoEntity)) {
+        if (!(object instanceof InfoEntity))
+        {
             return false;
         }
         InfoEntity other = (InfoEntity) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
+        {
             return false;
         }
         return true;
     }
 
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
         this.id = id;
     }
 
-    public String getEmail() {
+    public String getEmail()
+    {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email)
+    {
         this.email = email;
     }
 
-    public List<Phone> getPhones() {
+    public List<Phone> getPhones()
+    {
         return phones;
     }
 
-    public void setPhones(List<Phone> phones) {
+    public void setPhones(List<Phone> phones)
+    {
         this.phones = phones;
     }
 
-    public Address getAddress() {
+    public Address getAddress()
+    {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(Address address)
+    {
         this.address = address;
     }
 

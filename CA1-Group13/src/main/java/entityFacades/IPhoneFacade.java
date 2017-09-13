@@ -9,7 +9,7 @@ public interface IPhoneFacade {
     public Phone addPhone(Phone phone);
     public Phone editPhone(Phone phone);
     public Phone deletePhone(Phone phone);
-    public Phone deletePhone(String phoneNumber);
+    public Phone deletePhone(String phoneNumber);    
     public List<Phone> getPhones();
 
 }

@@ -26,20 +26,24 @@ public class PersonFacadeTest {
     private PersonFacade pf;
     private String PU = "PU_DERBY";
 
-    public PersonFacadeTest() {
+    public PersonFacadeTest()
+    {
         pf = new PersonFacade();
     }
 
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass()
+    {
     }
 
     @AfterClass
-    public static void tearDownClass() {
+    public static void tearDownClass()
+    {
     }
 
     @Before
-    public void setUp() {
+    public void setUp()
+    {
         System.out.println("SetUp");
         emf = Persistence.createEntityManagerFactory(PU);
         pf.addEntityManagerFactory(emf);
@@ -56,7 +60,8 @@ public class PersonFacadeTest {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown()
+    {
         System.out.println("TearDown");
         emf.close();
         HashMap<String, Object> puproperties = new HashMap();
@@ -66,7 +71,8 @@ public class PersonFacadeTest {
     }
 
     @Test
-    public void testGetPerson_int() {
+    public void testGetPerson_int()
+    {
         System.out.println("getPerson");
         Person expResult = new Person("bob", "hansen", "Bob@Hop.dk");
 
@@ -79,23 +85,26 @@ public class PersonFacadeTest {
 //     * Test of getPerson method, of class PersonFacade.
 //     */
     @Test
-    public void testGetPersonByPhone() {
+    public void testGetPersonByPhone()
+    {
         System.out.println("getPersonbyphone");
         long phoneNumber = 44885522;
         Person p = pf.getPerson(1);
         Phone phone = new Phone("44885522", "home phone", p);
-          p.addPhone(phone);
+        p.addPhone(phone);
         p = pf.editPerson(p);
         Person result = pf.getPerson(phoneNumber);
         Person expResult = pf.getPerson(1);
         assertEquals(expResult, result);
-     
+
     }
+
     /**
      * Test of editPerson method, of class PersonFacade.
      */
     @Test
-    public void testEditPerson() {
+    public void testEditPerson()
+    {
         Person p = pf.getPerson(1);
         p.setFirstName("frans");
         Person editedPerson = pf.editPerson(p);
@@ -108,23 +117,24 @@ public class PersonFacadeTest {
      * Test of addPerson method, of class PersonFacade.
      */
     @Test
-    public void testAddPerson() {
+    public void testAddPerson()
+    {
         System.out.println("addPerson");
 
-        Person expResult = new Person("Ole", "Larsen", "Bob@Hop.dk");;
-        Person result = pf.addPerson(new Person("Ole", "Larsen", "Bob@Hop.dk"));
-        assertEquals(4, pf.getPersons().size());
+        int expResult = 4;
+        pf.addPerson(new Person("Forsatan", "Larsen", "Knud@Hop.dk"));
+        assertEquals(expResult, pf.getPersons().size());
 
     }
 
- 
     /**
      * Test find persons by zip code.
      */
     @Test
-    public void testGetPersonsByZip() {
+    public void testGetPersonsByZip()
+    {
         System.out.println("getPersonsbyzip");
-        CityInfo ci = new CityInfo("9999","HardZip");
+        CityInfo ci = new CityInfo("9999", "HardZip");
         Address address = new Address("EnSted", "2. tv", ci);
         ci.addAddress(address);
         Person p = pf.getPerson(1);
@@ -144,7 +154,8 @@ public class PersonFacadeTest {
      * Test of deletePerson method, of class PersonFacade.
      */
     @Test
-    public void testDeletePerson_Person() {
+    public void testDeletePerson_Person()
+    {
         System.out.println("deletePerson");
         pf.deletePerson(1);
         assertEquals(2, pf.getPersons().size());

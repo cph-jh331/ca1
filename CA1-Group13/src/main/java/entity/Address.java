@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,20 +36,19 @@ public class Address implements Serializable {
     private Long id;
     private String street;
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
-    private List<InfoEntity> infoEntities;
+    private List<InfoEntity> infoEntities = new ArrayList<>();
     private String additional;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private CityInfo cityInfo;
 
     public Address()
     {
-        this.infoEntities = new ArrayList<>();
+
     }
 
     public Address(String street, String additional, CityInfo cityInfo)
     {
         this.street = street;
-        this.infoEntities = new ArrayList<>();
         this.additional = additional;
         this.cityInfo = cityInfo;
     }

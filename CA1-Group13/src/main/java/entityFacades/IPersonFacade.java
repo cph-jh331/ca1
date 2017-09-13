@@ -14,6 +14,7 @@ public interface IPersonFacade {
     public List<Person> getPersons();
     public List<Person> getPersons(String zipCode);
     public Person getPerson(long phoneNumber);
+    public Person getByEmail(String email);
     
     
 }
