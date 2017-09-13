@@ -10,12 +10,19 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author bloch
  */
 @Entity
+@NamedQueries(
+        {
+            @NamedQuery(name = "Phone.findAllPhones", query = "SELECT p FROM Phone p")
+           
+        })
 public class Phone implements Serializable {
 
     private static final long serialVersionUID = 1L;

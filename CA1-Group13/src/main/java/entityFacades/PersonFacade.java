@@ -111,7 +111,7 @@ public class PersonFacade implements IPersonFacade {
         try
         {
             em.getTransaction().begin();
-            em.merge(p);
+            em.persist(p);
             em.getTransaction().commit();
             return p;
         } finally
