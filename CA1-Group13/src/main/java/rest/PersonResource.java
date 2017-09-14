@@ -139,6 +139,7 @@ public class PersonResource {
             throw new ZipCodeNotValidException();
 
         }
+        //spytter et array ud!
         List<Person> pList = pf.getPersons(zipcode);
         if (pList.isEmpty())
         {

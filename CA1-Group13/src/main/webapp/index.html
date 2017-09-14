@@ -64,7 +64,7 @@
                                 <fieldset>
                                     <legend><img src="resources/mang.gif" width="54" height="54" align="left" alt="Comapny Management" title="Comapny Management">Comapny Management</legend>
                                     <table border="0" cellpadding="0" cellspacing="0" width="100%" id="LogSource">
-                                        <tr>
+                                        <!--<tr>
                                             <td width="25%" align="center">
                                                 <div class="block" onclick="document.location = '';" onmouseover="setClass(this, 'OVER');" onmouseout="setClass(this, 'OUT');">
                                                     <img src="resources/mang.gif" width="54" height="54" vspace="10" hspace="5" alt="Add Log Source" title="Add Log Source" align="left"><br>Get all persons by hobby<br clear="all">
@@ -89,6 +89,7 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        -->
 
                                         <tr>
                                             <td colspan="4" height="10"></td>
@@ -117,10 +118,11 @@
                                 <div class="form-group">
                                     <input type="text" id="phoneId" class="form-control"/>
                                     <button id="findByPhone" class="btn btn-warning">get person with phone</button>
+                                    <button id="findAllPersonsbtn" class="btn btn-success"> Get all persons</button>
                                 </div>
                             </div>
                             <table class="table table-bordered">
-                                <tr>
+
                                 <thead>
                                 <th>First name</th>
                                 <th>Last name</th>
@@ -131,7 +133,7 @@
                                 </thead>
                                 <tbody id="personTableBody">
                                 </tbody>
-                                </tr>
+
                             </table>
                         </div>
 
@@ -170,5 +172,6 @@
     </tr>
 </table>      
 </div>
+<script src="app.js"></script>
 </body>
 </html>
