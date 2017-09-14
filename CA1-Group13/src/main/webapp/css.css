@@ -13,6 +13,7 @@ body
   font-family :  "Open Sans", Arial, sans-serif;
 }
 
+
 table
 {
   border-collapse  :  collapse;
@@ -97,15 +98,17 @@ legend img
   margin-right  :  5px;
 }
 
+
 #MainTable
 {
-  width         :  1001px;
+  width         :  800px;
   height        :  100%;
   margin        :  0px auto 0px auto;
   border-left   :  solid 1px #000000;
   border-right  :  solid 1px #000000;
   background    :  #ffffff;
 }
+
 
 #Header
 {

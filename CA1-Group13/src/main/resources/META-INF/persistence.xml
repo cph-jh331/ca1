@@ -14,11 +14,9 @@
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://138.68.88.194:3306/cat1legning?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="lasse"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-<<<<<<< HEAD
+
       <property name="javax.persistence.jdbc.password" value="test"/>
-=======
-      <property name="javax.persistence.jdbc.password" value="Hest123"/>
->>>>>>> 49af4c8498b833578a9b6afde2851496f3fb7fb2
+
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
       <property name="javax.persistence.sql-load-script-source" value="scripts/populateZip.sql"/>
       <property name="javax.persistence.sql-load-script-source" value="scripts/populatePerson.sql"/>

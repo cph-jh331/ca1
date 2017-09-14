@@ -73,7 +73,7 @@ public class PersonResource {
     @GET
     @Path("complete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPerson(@PathParam("id") int id)
+    public Response getPerson(@PathParam("id") long id)
     {
         Person p = pf.getPerson(id);
         if (p == null)
