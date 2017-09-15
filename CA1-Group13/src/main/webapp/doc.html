@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class=" container">
+
+
+
+            <div class="jumbotron">
+                <div id="authors" style=" color: blue">Group members: Murched kayed, John Hansen, Lasse Andersen </div>
+
+                <div id="class" style=" color: blue">Class: DAT</div>
+
+                <div id= "group" style=" color: blue"> Group number: 13 DAT </div>
+
+                <h2>Description Of The Rest API:</h2>
+                <h3>
+                    Get all persons with complete info.                    
+                </h3>
+                <p1>
+                    URL: person/complete/<br>
+                    Method: GET <br>
+                    Success response: code 200<br>
+                    Content:
+                    <samp>
+                        [
+                        {
+                        "firstName": "Henning",
+                        "lastName": "Primdahl",
+                        "email": "sko@sko.dk",
+                        "phones": [
+                        {
+                        "phoneNumber": "22334455",
+                        "description": "Home Phone"
+                        },
+                        {
+                        "phoneNumber": "33445566",
+                        "description": "Mobile"
+                        }
+                        ],
+                        "street": "hestegade",
+                        "additionalInfo": "3.stv",
+                        "zipcode": "0900",
+                        "city": "København C"
+                        } ]
+                    </samp><br>
+                    Error response: code 404<br>
+
+                </p1>
+
+                <h3>
+                    Get specific person with a phonenumber.
+                </h3>
+                <p1>
+                    URL: person/complete/id<br>
+                    Method: GET <br>
+                    Required: id = [Long]<br>
+                    example
+                    Success response: code 200<br>
+                    Content:
+                    <samp>
+                        {
+                        "firstName": "Henning",
+                        "lastName": "Primdahl",
+                        "email": "sko@sko.dk",
+                        "phones": [
+                        {
+                        "phoneNumber": "22334455",
+                        "description": "Home Phone"
+                        },
+                        {
+                        "phoneNumber": "33445566",
+                        "description": "Mobile"
+                        }
+                        ],
+                        "street": "hestegade",
+                        "additionalInfo": "3.stv",
+                        "zipcode": "0900",
+                        "city": "København C"
+                        } 
+                    </samp><br>
+                    Error response: code 404<br>
+
+                </p1>
+
+                <h2>Test:</h2>
+                <p>We tested our system by using Junit and rest assured Testing , where by junit we tested our facade and we with rest assured test we tested our  API (person resources).<p>
+                <h2>Inheritance Strategy:</h2>
+                <p>The Strategy of our inheritance: The Person and Company classes inherit from InfoEntity, so Person and Company will extend the id and email attribute from the InfoEntity class.
+                    We have make the InfoEntity class as a abstract class, because it us the methods from Person and Company, and still have abstract methods that Person and Company does extends.
+                    Lasse Andersen
+                    Flow 1 Feedback.
+                </p>
+                <h2>How To Test:</h2>
+
+                <h2>Who Did What:</h2>
+
+                <h2>FeedBack</h2>
+                <p>På vegne af gruppe 13 (John, Murched & Lasse) vil vi give lidt feedback på flow 1.
+                    Vi syntes alle at der har været alt for meget nyt, i et tempo der måske godt kunne skrues lidt ned. Det er selvfølgelig godt at blive bombet med emner og opgaver hvis man kan gabe over det,
+                    men i denne omgang har det måske lige været for stor en mundfuld. Udover det har der været noget bedre struktur i undervisningen end på 2.semester, og det har været rigtig godt.
+                    Vi syntes også at det er et godt koncept med at få opgaver til ugens dage så man kan få fingerene på tasterne, også endnu bedre at man om fredagen har massere af mulighed for at få hjælp.
+                    Det koncept skal i holde fast i, og bestemt også morgenmaden om fredagen.</p>
+
+            </div>
+
+        </div>
+    </body>
+</html>
