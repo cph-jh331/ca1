@@ -36,6 +36,7 @@ public class ApplicationConfig extends Application {
         resources.add(exceptions.exceptionmappers.PersonNotFoundExceptionMapper.class);
         resources.add(exceptions.exceptionmappers.ZipCodeNotValidExceptionMapper.class);
         resources.add(rest.PersonResource.class);
+        resources.add(rest.ZipcodeResource.class);
     }
     
 }

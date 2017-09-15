@@ -14,7 +14,7 @@ function getPersonWithPhone() {
     promise.then(function (response) {
         return response.json();
     }).then(function (person) {
-        document.getElementById("personTableBody").innerHTML = genSinglePersonTable(person);
+        document.getElementById("tId").innerHTML = genSinglePersonTable(person);
     });
 }
 
@@ -29,24 +29,52 @@ function getAllPersons() {
     promise.then(function (response) {
         return response.json();
     }).then(function (persons) {
-        document.getElementById("personTableBody").innerHTML = generatePersonsTable(persons);
+        document.getElementById("tId").innerHTML = generatePersonsTable(persons);
     });
 }
 
+function getAllZipcodes() {
+    console.log("preben");
+    var myHeaders = new Headers;
+    myHeaders.set("Content-Type", "application/json");
+    var promise = fetch("api/zipcode", {
+        method: "GET",
+        headers: myHeaders
+    });
+    promise.then(function (response) {
+        return response.json();
+    }).then(function (zipcodes) {
+        document.getElementById("tId").innerHTML = genZipcodesTable(zipcodes);
+    });
+}
+
+function genZipcodesTable(zipcodes) {
+    var htmlStr = "<thead><th>Zipcode</th><th>City</th></thead><tbody></tbody>";
+    var newZipcodesArray = zipcodes.map(function (zipcode) {
+        return "<tr><td>" + zipcode.zipcode
+                + "</td><td>" + zipcode.city
+                + "</td></tr>";
+    });
+    htmlStr += newZipcodesArray.join('');
+    return htmlStr;
+
+}
+
 function genSinglePersonTable(person) {
-    return ""
+    var htmlStr = "<thead><th>First name</th><th>Last name</th><th>Email</th><th>Address</th><th>Phones</th><th>Zipcode</th></thead><tbody></tbody>";
+    return htmlStr+= ""
             + "<tr><td>" + person.firstName
             + "</td><td>" + person.lastName
             + "</td><td>" + person.email
             + "</td><td>" + person.additionalInfo + "<br>" + person.street + "<br>" + person.city
             + "</td><td>" + phoneNumbersStr(person)
             + "</td><td>" + person.zipcode
-            + "</td></tr>";
+            + "</td></tr>"
 }
 
 function generatePersonsTable(persons) {
 
-    var htmlStr = "";
+    var htmlStr = "<thead><th>First name</th><th>Last name</th><th>Email</th><th>Address</th><th>Phones</th><th>Zipcode</th></thead><tbody></tbody>";
     var newPersonsArray = persons.map(function (person) {
         return "<tr><td>" + person.firstName
                 + "</td><td>" + person.lastName
@@ -56,8 +84,10 @@ function generatePersonsTable(persons) {
                 + "</td><td>" + person.zipcode
                 + "</td></tr>";
     });
-    htmlStr = newPersonsArray.join('');
+    htmlStr += newPersonsArray.join('');
     return htmlStr;
+
+
 
 //            + "<tr><td>" + person.firstName
 //            + "</td><td>" + person.lastName
@@ -78,3 +108,4 @@ function phoneNumbersStr(person) {
 
 document.getElementById("findByPhone").addEventListener("click", getPersonWithPhone);
 document.getElementById("findAllPersonsbtn").addEventListener("click", getAllPersons);
+document.getElementById("getAllZip").addEventListener("click", getAllZipcodes);
