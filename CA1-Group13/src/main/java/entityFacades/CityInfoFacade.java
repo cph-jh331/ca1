@@ -19,25 +19,30 @@ public class CityInfoFacade implements ICityInfoFacade {
 
     private EntityManagerFactory emf;
 
-    public CityInfoFacade(EntityManagerFactory emf) {
+    public CityInfoFacade(EntityManagerFactory emf)
+    {
         this.emf = emf;
     }
 
-    private EntityManager getEntityManager() {
+    private EntityManager getEntityManager()
+    {
         return emf.createEntityManager();
     }
 
     @Override
-    public CityInfo getCityInfo(String zipcode) {
+    public CityInfo getCityInfo(String zipcode)
+    {
         EntityManager em = getEntityManager();
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             CityInfo ci = em.find(CityInfo.class, zipcode);
             em.getTransaction().commit();
             return ci;
 
-        } finally {
+        } finally
+        {
             em.close();
 
         }
@@ -45,84 +50,102 @@ public class CityInfoFacade implements ICityInfoFacade {
     }
 
     @Override
-    public CityInfo addCityInfo(CityInfo cityInfo) {
+    public CityInfo addCityInfo(CityInfo cityInfo)
+    {
         EntityManager em = getEntityManager();
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             em.persist(cityInfo);
             em.getTransaction().commit();
             return cityInfo;
 
-        } finally {
+        } finally
+        {
             em.close();
         }
 
     }
 
     @Override
-    public CityInfo editCityInfo(CityInfo cityInfo) {
+    public CityInfo editCityInfo(CityInfo cityInfo)
+    {
         EntityManager em = getEntityManager();
 
-        try {
+        try
+        {
 
             em.getTransaction().begin();
             CityInfo ci = em.find(CityInfo.class, cityInfo.getZipCode());
-            if (ci != null) {
+            if (ci != null)
+            {
                 em.merge(ci);
             }
             em.getTransaction().commit();
             return ci;
 
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
     @Override
-    public CityInfo deleteCityInfo(CityInfo cityInfo) {
+    public CityInfo deleteCityInfo(CityInfo cityInfo)
+    {
         EntityManager em = getEntityManager();
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             CityInfo ci = em.find(CityInfo.class, cityInfo.getZipCode());
-            if (ci != null) {
+            if (ci != null)
+            {
                 em.remove(ci);
             }
             em.getTransaction().commit();
             return ci;
 
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
     @Override
-    public CityInfo deleteCityInfo(String zipCode) {
+    public CityInfo deleteCityInfo(String zipCode)
+    {
         EntityManager em = getEntityManager();
 
-        try {
+        try
+        {
             CityInfo ci = em.find(CityInfo.class, zipCode);
             em.getTransaction().begin();
-            if (zipCode != null) {
+            if (zipCode != null)
+            {
                 em.remove(ci);
             }
             em.getTransaction().commit();
             return ci;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
     @Override
-    public List<CityInfo> getAllCityInfos() {
+    public List<CityInfo> getAllCityInfos()
+    {
         EntityManager em = getEntityManager();
 
-        try {
+        try
+        {
             Query query = em.createNamedQuery("CityInfo.findAllCityInfo");
             return query.getResultList();
 
-        } finally {
+        } finally
+        {
             em.close();
         }
     }

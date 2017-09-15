@@ -27,7 +27,7 @@ public class CompanyFacade implements ICompanyFacade {
         EntityManager em = getEntityManager();
         try
         {
-            Query q = em.createNamedQuery("InfoEntity.findCompWithCVR");
+            Query q = em.createNamedQuery("Company.findCompWithCVR");
             q.setParameter("cvr", cvr);
             Company c = (Company) q.getSingleResult();
             return c;
@@ -119,7 +119,7 @@ public class CompanyFacade implements ICompanyFacade {
         EntityManager em = getEntityManager();
         try
         {
-            Query q = em.createNamedQuery("InfoEntity.findCompWithCVR")
+            Query q = em.createNamedQuery("Company.findCompWithCVR")
                     .setParameter("cvr", cvr);
             Company c = (Company) q.getSingleResult();
             if (c != null)
@@ -164,7 +164,7 @@ public class CompanyFacade implements ICompanyFacade {
         EntityManager em = getEntityManager();
         try
         {
-            Query q = em.createNamedQuery("InfoEntity.findAllCompanies");
+            Query q = em.createNamedQuery("Company.findAllCompanies");
             return q.getResultList();
         } finally
         {

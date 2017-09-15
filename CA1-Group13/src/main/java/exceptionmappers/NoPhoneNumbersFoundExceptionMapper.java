@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package exceptions.exceptionmappers;
+package exceptionmappers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import exceptions.ErrorMessage;
-import exceptions.NoPersonsAtZipcodeException;
+import exceptions.NoPhoneNumbersFoundException;
 import javax.servlet.ServletContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -16,21 +11,20 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 @Provider
-public class NoPersonsAtZipcodeExceptionMapper implements ExceptionMapper<NoPersonsAtZipcodeException> {
+public class NoPhoneNumbersFoundExceptionMapper implements ExceptionMapper<NoPhoneNumbersFoundException> {
 
     @Context
     private ServletContext context;
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     @Override
-    public Response toResponse(NoPersonsAtZipcodeException e)
+    public Response toResponse(NoPhoneNumbersFoundException e)
     {
         boolean isDebug = context.getInitParameter("debug").equals("true");
         ErrorMessage err = new ErrorMessage(e, 404, isDebug);
-        err.setDescription("No persons at zipcode");
-        err.setMessage("No persons at zipcode");
-        
+        err.setDescription("No companies exists at all");
+        err.setMessage("No companies exists at all");
+
         return Response.status(404).entity(gson.toJson(err)).build();
     }
-
 }

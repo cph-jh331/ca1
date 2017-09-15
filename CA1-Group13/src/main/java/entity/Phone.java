@@ -30,7 +30,7 @@ public class Phone implements Serializable {
     private String number;
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private InfoEntity infoEntity;
 
     public Phone()

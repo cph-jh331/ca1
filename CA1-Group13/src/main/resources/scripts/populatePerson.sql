@@ -1356,6 +1356,29 @@ insert into ADDRESS (`ADDITIONAL`, `STREET`, `CITYINFO_ZIP`) values ('3.stv', 'h
 insert into INFOENTITY(`DTYPE`, `EMAIL`, `ADDRESS_ID`) values ('Person', 'sko@sko.dk', 1);
 insert into PERSON (id, firstname, lastname) values (1, 'Henning', 'Primdahl'); 
 insert into PHONE (`NUMBER`,`DESCRIPTION`, `INFOENTITY_ID`) VALUES ('22334455', 'Home Phone', 1);
+insert into PHONE (`NUMBER`,`DESCRIPTION`, `INFOENTITY_ID`) VALUES ('33445566', 'Mobile', 1);
+
+insert into INFOENTITY(`DTYPE`, `EMAIL`, `ADDRESS_ID`) values ('Person', 'sok@sok.dk', 1);
+insert into PERSON (id, firstname, lastname) values (2, 'Pim', 'de Keysergracht'); 
+insert into PHONE (`NUMBER`,`DESCRIPTION`, `INFOENTITY_ID`) VALUES ('11334455', 'Home Phone', 2);
+insert into PHONE (`NUMBER`,`DESCRIPTION`, `INFOENTITY_ID`) VALUES ('11445566', 'Mobile', 2);
+
+insert into ADDRESS (`ADDITIONAL`, `STREET`, `CITYINFO_ZIP`) values ('1.tv', 'Dødsgaden', '0900');
+insert into INFOENTITY(`DTYPE`, `EMAIL`, `ADDRESS_ID`) values ('Person', 'buks@buks.dk', 2);
+insert into PERSON (id, firstname, lastname) values (3, 'Ole', 'Olsen'); 
+insert into PHONE (`NUMBER`,`DESCRIPTION`, `INFOENTITY_ID`) VALUES ('22334411', 'Home Phone', 3);
+insert into PHONE (`NUMBER`,`DESCRIPTION`, `INFOENTITY_ID`) VALUES ('33445511', 'Mobile', 3);
+
+insert into INFOENTITY(`DTYPE`, `EMAIL`, `ADDRESS_ID`) values ('Person', 'ged@ged.dk', 2);
+insert into PERSON (id, firstname, lastname) values (4, 'Bobby', 'Olsen'); 
+insert into PHONE (`NUMBER`,`DESCRIPTION`, `INFOENTITY_ID`) VALUES ('22334422', 'Home Phone', 4);
+insert into PHONE (`NUMBER`,`DESCRIPTION`, `INFOENTITY_ID`) VALUES ('33445533', 'Mobile', 4);
+
+insert into ADDRESS (`ADDITIONAL`,`STREET`,`CITYINFO_ZIP`) VALUES ('10', 'Firmagaden', '0800');
+INSERT INTO INFOENTITY (`DTYPE`, `EMAIL`, `ADDRESS_ID`) VALUES ('Company', 'paelsmager@paels.dk', 3);
+INSERT INTO COMPANY (`ID`,`CVR`,`DESCRIPTION`,`MARKETVALUE`,`NAME`,`NUMEMPLOYEES`) VALUES (5, 10000001, 'Sælger flotte pælse', 214251, 'PælsCO', 40);
+INSERT INTO PHONE (`NUMBER`, `DESCRIPTION`, `INFOENTITY_ID`) VALUES ('99887766', 'Sales', 5);
+INSERT INTO PHONE (`NUMBER`, `DESCRIPTION`, `INFOENTITY_ID`) VALUES ('88887766', 'HR', 5);
 
 
 

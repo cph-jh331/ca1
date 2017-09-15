@@ -9,6 +9,7 @@ import entity.Address;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -68,9 +69,12 @@ public class AddressFacade implements IAddressFacade {
         EntityManager em = getEntityManager();
         try
         {
-            em.getTransaction().begin();
-            em.merge(address);
-            em.getTransaction().commit();
+            Address adr = em.find(Address.class, address.getId());
+            if(adr != null){
+                em.getTransaction().begin();
+                em.merge(address);
+                em.getTransaction().commit();                
+            }
             return address;
         } finally
         {
@@ -88,7 +92,6 @@ public class AddressFacade implements IAddressFacade {
             Address adr = em.find(Address.class, address.getId());
             if (adr != null)
             {
-
                 em.getTransaction().begin();
                 em.remove(address);
                 em.getTransaction().commit();
@@ -130,6 +133,26 @@ public class AddressFacade implements IAddressFacade {
         {
             Query q = em.createNamedQuery("Address.findAllAddresses");
             return q.getResultList();
+        } finally
+        {
+            em.close();
+        }
+    }
+
+    @Override
+    public Address getAddressWithoutId(String street, String AdditionalInfo, String ZipCode)
+    {
+        EntityManager em = getEntityManager();
+        try
+        {
+            Query q = em.createNamedQuery("Address.findAddressWithNoId");
+            q.setParameter("zipcode", ZipCode);
+            q.setParameter("addInfo", AdditionalInfo);
+            q.setParameter("street", street);
+            return (Address) q.getSingleResult();
+        } catch (NoResultException e)
+        {
+            return null;
         } finally
         {
             em.close();

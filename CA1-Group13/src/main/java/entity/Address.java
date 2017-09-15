@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +26,7 @@ import javax.persistence.OneToMany;
 @NamedQueries(
         {
             @NamedQuery(name = "Address.findAllAddresses", query = "SELECT a FROM Address a")
+            ,@NamedQuery(name = "Address.findAddressWithNoId", query = "SELECT a FROM Address a where a.cityInfo.zip =:zipcode AND a.additional =:addInfo AND a.street =:street")
         })
 public class Address implements Serializable {
 
@@ -35,7 +35,7 @@ public class Address implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String street;
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "address", cascade = CascadeType.MERGE)
     private List<InfoEntity> infoEntities = new ArrayList<>();
     private String additional;
     @ManyToOne(cascade = CascadeType.MERGE)
@@ -56,6 +56,11 @@ public class Address implements Serializable {
     public boolean AddInfoEntityToList(InfoEntity infoEntity)
     {
         return this.infoEntities.add(infoEntity);
+    }
+
+    public boolean removeInfoEntity(InfoEntity infoEntity)
+    {
+        return this.infoEntities.remove(infoEntity);
     }
 
     public Long getId()

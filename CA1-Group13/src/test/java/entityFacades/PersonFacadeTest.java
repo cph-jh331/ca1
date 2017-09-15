@@ -92,7 +92,7 @@ public class PersonFacadeTest {
         Person p = pf.getPerson(1);
         Phone phone = new Phone("44885522", "home phone", p);
         p.addPhone(phone);
-        p = pf.editPerson(p);
+        pf.editPerson(p);
         Person result = pf.getPerson(phoneNumber);
         Person expResult = pf.getPerson(1);
         assertEquals(expResult, result);
@@ -147,6 +147,8 @@ public class PersonFacadeTest {
         Person expResult = pf.getPerson(1);
         List<Person> result = pf.getPersons(zipCode);
         assertEquals(expResult.getFirstName(), result.get(0).getFirstName());
+        int size = 1;
+        assertEquals(size, result.size());
 
     }
 

@@ -22,8 +22,10 @@ import javax.persistence.NamedQuery;
 @NamedQueries(
         {
             @NamedQuery(name = "Person.findAllPersons", query = "SELECT p FROM Person p")
+            ,@NamedQuery(name = "Person.findPersonsByZip", query = "SELECT p FROM Person p WHERE p.address.cityInfo.zip =:zipcode")
             ,@NamedQuery(name = "Person.findPersonByPhone", query = "SELECT DISTINCT p FROM Person p, IN(p.phones) t WHERE t.number = :phoneNumber")
             ,@NamedQuery(name = "Person.findPersonByEmail", query = "SELECT DISTINCT p FROM Person p WHERE p.email =:email")
+            //,@NamedQuery(name = "Person.findPersonsByHobby", query = "SELECT p FROM Person p where p.hobbies.name =:hobbyName")
         })
 public class Person extends InfoEntity implements Serializable {
 
@@ -43,15 +45,13 @@ public class Person extends InfoEntity implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-    
-        public Person(String firstName, String lastName, String email, Address address)
+
+    public Person(String firstName, String lastName, String email, Address address)
     {
         super(email, address);
         this.firstName = firstName;
         this.lastName = lastName;
     }
-    
-    
 
     public Person(String firstName, String lastName, String email)
     {
@@ -63,6 +63,12 @@ public class Person extends InfoEntity implements Serializable {
     public boolean addHobby(Hobby hobby)
     {
         return hobbies.add(hobby);
+
+    }
+
+    public boolean removeHobby(Hobby hobby)
+    {
+        return hobbies.remove(hobby);
     }
 
     public String getFirstName()

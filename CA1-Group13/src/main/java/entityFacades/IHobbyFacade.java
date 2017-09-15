@@ -24,4 +24,6 @@ public interface IHobbyFacade {
 
     public List<Hobby> getAllHobbies();
 
+    public Hobby getHobbyByName(String name);
+
 }

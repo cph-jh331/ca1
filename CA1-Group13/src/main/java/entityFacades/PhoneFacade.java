@@ -10,72 +10,88 @@ public class PhoneFacade implements IPhoneFacade {
 
     private EntityManagerFactory emf;
 
-    public PhoneFacade() {
+    public PhoneFacade()
+    {
     }
 
-    public PhoneFacade(EntityManagerFactory emf) {
+    public PhoneFacade(EntityManagerFactory emf)
+    {
         this.emf = emf;
     }
 
-    public void addEntityManagerFactory(EntityManagerFactory emf) {
+    public void addEntityManagerFactory(EntityManagerFactory emf)
+    {
         this.emf = emf;
     }
 
-    public EntityManager getEntityManager() {
+    public EntityManager getEntityManager()
+    {
         return emf.createEntityManager();
     }
 
     @Override
 
-    public Phone getPhone(String phoneNumber) {
+    public Phone getPhone(String phoneNumber)
+    {
         EntityManager em = getEntityManager();
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             Phone p = em.find(Phone.class, phoneNumber);
             em.getTransaction().commit();
             return p;
 
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
     @Override
-    public Phone addPhone(Phone phone) {
+    public Phone addPhone(Phone phone)
+    {
         EntityManager em = getEntityManager();
-        try {
+        try
+        {
             em.getTransaction().begin();
             em.merge(phone);
             em.getTransaction().commit();
             return phone;
 
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
     @Override
-    public Phone editPhone(Phone phone) {
+    public Phone editPhone(Phone phone)
+    {
         EntityManager em = getEntityManager();
 
-        try {
+        try
+        {
             em.getTransaction().begin();
             em.merge(phone);
             em.getTransaction().commit();
             return phone;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
     @Override
-    public Phone deletePhone(Phone phone) {
+    public Phone deletePhone(Phone phone)
+    {
         EntityManager em = getEntityManager();
 
-        try {
+        try
+        {
             Phone p = em.find(Phone.class, phone);
-            if (p != null) {
+            if (p != null)
+            {
                 em.getTransaction().begin();
                 em.remove(p);
                 em.getTransaction().commit();
@@ -83,40 +99,48 @@ public class PhoneFacade implements IPhoneFacade {
             }
             return null;
 
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
     @Override
-    public Phone deletePhone(String phoneNumber) {
+    public Phone deletePhone(String phoneNumber)
+    {
         EntityManager em = getEntityManager();
-        try {
+        try
+        {
             Phone pNumber = em.find(Phone.class, phoneNumber);
-            if (pNumber != null) {
+            if (pNumber != null)
+            {
                 em.getTransaction().begin();
                 em.remove(pNumber);
                 em.getTransaction().commit();
                 return pNumber;
             }
             return null;
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
     @Override
-    public List<Phone> getPhones() {
+    public List<Phone> getPhones()
+    {
         List<Phone> phoneList;
         EntityManager em = getEntityManager();
-        try {
+        try
+        {
             em.getTransaction().begin();
             Query query = em.createNamedQuery("Phone.findAllPhones");
             phoneList = query.getResultList();
             em.getTransaction().commit();
             return phoneList;
-            
-        } finally {
+
+        } finally
+        {
             em.close();
         }
 

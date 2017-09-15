@@ -1,6 +1,7 @@
 package entityFacades;
 
 import entity.Person;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -60,6 +61,9 @@ public class PersonFacade implements IPersonFacade {
             q.setParameter("phoneNumber", phone);
             return (Person) q.getSingleResult();
 
+        } catch (NoResultException e)
+        {
+            return null;
         } finally
         {
             em.close();
@@ -70,11 +74,16 @@ public class PersonFacade implements IPersonFacade {
     public Person editPerson(Person p)
     {
         EntityManager em = getEntityManager();
+
         try
         {
-            em.getTransaction().begin();
-            em.merge(p);
-            em.getTransaction().commit();
+            Person person = em.find(Person.class, p.getId());
+            if (person != null)
+            {
+                em.getTransaction().begin();
+                em.merge(p);
+                em.getTransaction().commit();
+            }
             return p;
         } finally
         {
@@ -133,6 +142,9 @@ public class PersonFacade implements IPersonFacade {
             em.getTransaction().commit();
             return pList;
 
+        } catch (NoResultException e)
+        {
+            return new ArrayList<>();
         } finally
         {
             em.close();
@@ -146,9 +158,12 @@ public class PersonFacade implements IPersonFacade {
 
         try
         {
-            Query q = em.createNamedQuery("InfoEntity.findPersonsByZip");
+            Query q = em.createNamedQuery("Person.findPersonsByZip");
             q.setParameter("zipcode", zipCode);
             return q.getResultList();
+        } catch (NoResultException e)
+        {
+            return new ArrayList<>();
         } finally
         {
             em.close();

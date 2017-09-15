@@ -10,18 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -30,13 +25,6 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQueries(
-        {
-            @NamedQuery(name = "InfoEntity.findPersonsByZip", query = "SELECT p FROM Person p WHERE p.address.cityInfo.zip =:zipcode")
-            //vi henter alle personerne fra person hvor vi chainer os over til postnummeret...s
-            ,@NamedQuery(name = "InfoEntity.findAllCompanies", query = "SELECT c FROM Company c")
-            ,@NamedQuery(name = "InfoEntity.findCompWithCVR", query = "SELECT c FROM Company c where c.cvr = :cvr")
-        })
 public abstract class InfoEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,13 +32,13 @@ public abstract class InfoEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true)    
     private String email;
 
     @OneToMany(mappedBy = "infoEntity", cascade = CascadeType.ALL)
     private List<Phone> phones = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Address address;
 
     public InfoEntity()
@@ -83,6 +71,23 @@ public abstract class InfoEntity implements Serializable {
     public boolean addPhone(String phoneNumber, String desc)
     {
         return phones.add(new Phone(phoneNumber, desc, this));
+    }
+
+    public boolean removePhone(String phoneNumber)
+    {
+        for (Phone phone : phones)
+        {
+            if (phone.getNumber().equals(phoneNumber))
+            {
+                return phones.remove(phone);
+            }
+        }
+        return false;
+    }
+
+    public boolean removePhone(Phone phone)
+    {
+        return phones.remove(phone);
     }
 
     @Override

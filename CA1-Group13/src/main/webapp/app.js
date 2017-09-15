@@ -62,7 +62,7 @@ function genZipcodesTable(zipcodes) {
 
 function genSinglePersonTable(person) {
     var htmlStr = "<thead><th>First name</th><th>Last name</th><th>Email</th><th>Address</th><th>Phones</th><th>Zipcode</th></thead><tbody></tbody>";
-    return htmlStr+= ""
+    return htmlStr += ""
             + "<tr><td>" + person.firstName
             + "</td><td>" + person.lastName
             + "</td><td>" + person.email
@@ -86,17 +86,6 @@ function generatePersonsTable(persons) {
     });
     htmlStr += newPersonsArray.join('');
     return htmlStr;
-
-
-
-//            + "<tr><td>" + person.firstName
-//            + "</td><td>" + person.lastName
-//            + "</td><td>" + person.email
-//            + "</td><td>" + person.additionalInfo + "<br>" + person.street + "<br>" + person.city
-//            + "</td><td>" + phoneNumbersStr(person)
-//            + "</td><td>" + person.zipcode
-//            + "</td></tr>";
-
 }
 
 function phoneNumbersStr(person) {
