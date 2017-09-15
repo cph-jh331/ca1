@@ -60,17 +60,7 @@ function genZipcodesTable(zipcodes) {
 
 }
 
-function genSinglePersonTable(person) {
-    var htmlStr = "<thead><th>First name</th><th>Last name</th><th>Email</th><th>Address</th><th>Phones</th><th>Zipcode</th></thead><tbody></tbody>";
-    return htmlStr += ""
-            + "<tr><td>" + person.firstName
-            + "</td><td>" + person.lastName
-            + "</td><td>" + person.email
-            + "</td><td>" + person.additionalInfo + "<br>" + person.street + "<br>" + person.city
-            + "</td><td>" + phoneNumbersStr(person)
-            + "</td><td>" + person.zipcode
-            + "</td></tr>"
-}
+
 
 function generatePersonsTable(persons) {
 
@@ -87,6 +77,17 @@ function generatePersonsTable(persons) {
     htmlStr += newPersonsArray.join('');
     return htmlStr;
 }
+function genSinglePersonTable(person) {
+    var htmlStr = "<thead><th>First name</th><th>Last name</th><th>Email</th><th>Address</th><th>Phones</th><th>Zipcode</th></thead><tbody></tbody>";
+    return htmlStr += ""
+            + "<tr><td>" + person.firstName
+            + "</td><td>" + person.lastName
+            + "</td><td>" + person.email
+            + "</td><td>" + person.additionalInfo + "<br>" + person.street + "<br>" + person.city
+            + "</td><td>" + phoneNumbersStr(person)
+            + "</td><td>" + person.zipcode
+            + "</td></tr>"
+}
 
 function phoneNumbersStr(person) {
     var phonearray = person.phones;
@@ -95,6 +96,68 @@ function phoneNumbersStr(person) {
     }).join('<br>');
 }
 
+function getAllPersonsByCity() {
+    var zipcode = document.getElementById("phoneId").value;
+    var promise = fetch("api/zipcode/" + zipcode);
+    promise.then(function (response) {
+        return response.json();
+
+
+    }).then(function (persons) {
+        document.getElementById("tId").innerHTML = generatePersonsTable(persons);
+
+
+    })
+
+
+}
+function getCompanyByCVR() {
+    var CVR = document.getElementById("phoneId").value;
+    var promise = fetch("api/company/complete/" + CVR);
+    promise.then(function (response) {
+        return response.json();
+
+    }).then(function (company) {
+
+        document.getElementById("tId").innerHTML = CompanyTabel(company);
+    })
+
+}
+function CompanyTabel(company) {
+    var htmlStr = "<thead><th>CVR</th><th>Company name</th><th>Email</th><th>Decription</th><th>Address</th><th>Phone</th><th>Market Value</th><th>Employee Number</th></thead><tbody></tbody>";
+
+    return htmlStr += ""+"<tr><td>" + company.cvr
+            + "</td><td>" + company.name
+            + "</td><td>" + company.email
+            + "</td><td>" + company.desc
+            + "</td><td>" + company.streetInfo + "<br>" + company.street + "<br>" + company.city + company.zipCode
+            + "</td><td>" + phoneNumbersStr(company)
+            + "</td><td>" + company.mValue
+            + "</td><td>" + company.numbEmp
+            + "</td></tr>";
+    };
+   
+
+//function CompanyTabel(company){
+//      var htmlStr = "<thead><th>CVR</th><th>Company name</th><th>Email</th><th>Decription</th><th>Address</th><th>Phone</th><th>Market Value</th><th>Employee Number</th></thead><tbody></tbody>";
+//       var newCompanyArray = company(function (company) {
+//        return "<tr><td>" + company.cvr
+//                + "</td><td>" + company.name
+//                + "</td><td>" + company.email
+//        + "</td><td>" + company.desc
+//                + "</td><td>" + company.streetInfo + "<br>" + company.street + "<br>" + company.city+company.zipCode
+//                + "</td><td>" + phoneNumbersStr(company)
+//        + "</td><td>" + company.mValue
+//+ "</td><td>" + company.numbEmp
+//                + "</td></tr>";
+//    });
+//    htmlStr += newCompanyArray.join('');
+//    return htmlStr;
+//}
+
 document.getElementById("findByPhone").addEventListener("click", getPersonWithPhone);
 document.getElementById("findAllPersonsbtn").addEventListener("click", getAllPersons);
 document.getElementById("getAllZip").addEventListener("click", getAllZipcodes);
+document.getElementById("getPersonsByZipcode").addEventListener("click", getAllPersonsByCity);
+document.getElementById("getCompanyByCVR").addEventListener("click", getCompanyByCVR);
+
