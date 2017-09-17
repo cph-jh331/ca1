@@ -58,7 +58,7 @@ public class RestTests {
     @Test
     public void testGetPersons()
     {
-        System.out.println("getPersons");
+        System.out.println("getPersons");        
     }
 
     @Test
@@ -95,7 +95,7 @@ public class RestTests {
         //GET
         PersonDetail gottenPerson = given()
                 .contentType(ContentType.JSON)
-                .when().get("/api/person/complete/2").as(PersonDetail.class);
+                .when().get("/api/person/complete/99999999").as(PersonDetail.class);
         assertNotNull(gottenPerson.getFirstName());
         assertEquals("Kurt", gottenPerson.getFirstName());
 
@@ -103,7 +103,7 @@ public class RestTests {
         PersonDetail deletedPerson = given()
                 .contentType(ContentType.JSON)
                 .when()
-                .delete("/api/person/2").as(PersonDetail.class);
+                .delete("/api/person/complete/99999999").as(PersonDetail.class);
         assertEquals("Kurt", deletedPerson.getFirstName());
     }
 }

@@ -31,13 +31,20 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources)
     {
+        resources.add(exceptionmappers.CityInfoDoesNotExistExceptionMapper.class);
         resources.add(exceptionmappers.CompanyNotFoundExceptionMapper.class);
         resources.add(exceptionmappers.EmailAlreadyExistsExceptionMapper.class);
+        resources.add(exceptionmappers.GenericExceptionMapper.class);
+        resources.add(exceptionmappers.NoCityInfoExceptionMapper.class);
         resources.add(exceptionmappers.NoPersonsAtZipcodeExceptionMapper.class);
         resources.add(exceptionmappers.NoPhoneNumbersFoundExceptionMapper.class);
+        resources.add(exceptionmappers.NotAllowedExceptionMapper.class);
+        resources.add(exceptionmappers.NotFoundExceptionMapper.class);
+        resources.add(exceptionmappers.PathParamExceptionMapper.class);
         resources.add(exceptionmappers.PersonNotFoundExceptionMapper.class);
         resources.add(exceptionmappers.PhoneNumberAlreadyExistsExceptionMapper.class);
         resources.add(exceptionmappers.PhoneNumberNotANumberExceptionMapper.class);
+        resources.add(exceptionmappers.UnsupportedMediaTypeExceptionMapper.class);
         resources.add(exceptionmappers.ZipCodeNotValidExceptionMapper.class);
         resources.add(rest.CompanyResource.class);
         resources.add(rest.PersonResource.class);

@@ -6,115 +6,500 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Documentation for CA1</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class=" container">
+        <div class="container">
 
 
+            <div id="authors" style=" color: blue">Group members: Murched Kayed, John David Bloch Hansen, Lasse Hougaard Andersen </div>
 
-            <div class="jumbotron">
-                <div id="authors" style=" color: blue">Group members: Murched kayed, John Hansen, Lasse Andersen </div>
+            <div id="class" style=" color: blue">Class: DAT</div>
 
-                <div id="class" style=" color: blue">Class: DAT</div>
+            <div id= "group" style=" color: blue">Group number: 13</div>
+            <hr/>
+            <h2>How To Test:</h2>                        
+            <hr/>
+            <h4>
+                Git repository: <a href="https://github.com/cph-jh331/ca1">https://github.com/cph-jh331/ca1</a><br><br>
+                Live: <a href="http://46.101.216.31/CA1-Group13/">http://46.101.216.31/CA1-Group13</a><br><br>
+                You can test some of the functionality with postman or by going to the glorious website mentioned above.<br>
+                The website have buttons, which should give you an idea how to test the system.
 
-                <div id= "group" style=" color: blue"> Group number: 13 DAT </div>
+            </h4>
+            <hr/>
 
-                <h2>Description Of The Rest API:</h2>
-                <h3>
-                    Get all persons with complete info.                    
-                </h3>
-                <p1>
-                    URL: person/complete/<br>
-                    Method: GET <br>
-                    Success response: code 200<br>
-                    Content:
-                    <samp>
-                        [
-                        {
-                        "firstName": "Henning",
-                        "lastName": "Primdahl",
-                        "email": "sko@sko.dk",
-                        "phones": [
-                        {
-                        "phoneNumber": "22334455",
-                        "description": "Home Phone"
-                        },
-                        {
-                        "phoneNumber": "33445566",
-                        "description": "Mobile"
-                        }
-                        ],
-                        "street": "hestegade",
-                        "additionalInfo": "3.stv",
-                        "zipcode": "0900",
-                        "city": "København C"
-                        } ]
-                    </samp><br>
-                    Error response: code 404<br>
+            <h2>Description Of The Rest API:</h2>
+            <hr/>
+            <h3>
+                Get all persons with complete info.                    
+            </h3>            
+            <p>
+                URL: person/complete/<br>
+                <a href="/CA1-Group13/api/person/complete/" target="_blank">/CA1-Group13/api/person/complete/</a><br>
+                Method: GET <br>
+                Success response: code 200<br>
+                Content example:<br>
+                <code>
+                    [
+                    {
+                    "firstName": "Henning",
+                    "lastName": "Primdahl",
+                    "email": "sko@sko.dk",
+                    "phones": [
+                    {
+                    "phoneNumber": "22334455",
+                    "description": "Home Phone"
+                    },
+                    {
+                    "phoneNumber": "33445566",
+                    "description": "Mobile"
+                    }
+                    ],
+                    "street": "hestegade",
+                    "additionalInfo": "3.stv",
+                    "zipcode": "0900",
+                    "city": "København C"
+                    } ]
+                </code><br>
+                Error response: code 404<br>
+                content:<br>
+                <code>
+                    {
+                    "code": 404,
+                    "message": "Persons not found",
+                    "description": "Persons does not exist!" 
+                    }
+                </code>
 
-                </p1>
 
-                <h3>
-                    Get specific person with a phonenumber.
-                </h3>
-                <p1>
-                    URL: person/complete/id<br>
-                    Method: GET <br>
-                    Required: id = [Long]<br>
-                    example
-                    Success response: code 200<br>
-                    Content:
-                    <samp>
-                        {
-                        "firstName": "Henning",
-                        "lastName": "Primdahl",
-                        "email": "sko@sko.dk",
-                        "phones": [
-                        {
-                        "phoneNumber": "22334455",
-                        "description": "Home Phone"
-                        },
-                        {
-                        "phoneNumber": "33445566",
-                        "description": "Mobile"
-                        }
-                        ],
-                        "street": "hestegade",
-                        "additionalInfo": "3.stv",
-                        "zipcode": "0900",
-                        "city": "København C"
-                        } 
-                    </samp><br>
-                    Error response: code 404<br>
+            </p>
+            <hr>
 
-                </p1>
+            <h3>
+                Get a specific person with a phonenumber.
+            </h3>            
+            <p>
+                URL: person/complete/phoneNumber<br>
+                <a href="/CA1-Group13/api/person/complete/11334455" target="_blank">/CA1-Group13/api/person/complete/11334455</a><br>
+                Method: GET <br>
+                Required: phonenumber = [Long]<br>
+                Success response: code 200<br>
+                Content example:<br>
+                <code>
+                    {
+                    "firstName": "Henning",
+                    "lastName": "Primdahl",
+                    "email": "sko@sko.dk",
+                    "phones": [
+                    {
+                    "phoneNumber": "22334455",
+                    "description": "Home Phone"
+                    },
+                    {
+                    "phoneNumber": "33445566",
+                    "description": "Mobile"
+                    }
+                    ],
+                    "street": "hestegade",
+                    "additionalInfo": "3.stv",
+                    "zipcode": "0900",
+                    "city": "København C"
+                    } 
+                </code><br>
+                Error response: code 404<br>
+                content:<br>
+                <code>
+                    {
+                    "code": 404,
+                    "message": "Person not found",
+                    "description": "Person does not exist!",
+                    }
+                </code>
 
-                <h2>Test:</h2>
-                <p>We tested our system by using Junit and rest assured Testing , where by junit we tested our facade and we with rest assured test we tested our  API (person resources).<p>
-                <h2>Inheritance Strategy:</h2>
-                <p>The Strategy of our inheritance: The Person and Company classes inherit from InfoEntity, so Person and Company will extend the id and email attribute from the InfoEntity class.
-                    We have make the InfoEntity class as a abstract class, because it us the methods from Person and Company, and still have abstract methods that Person and Company does extends.
-                    Lasse Andersen
-                    Flow 1 Feedback.
-                </p>
-                <h2>How To Test:</h2>
+            </p>
+            <hr/>
+            <h3>
+                Get persons from specific zipcode.
+            </h3>                            
+            <p>
+                URL: person/zipcode/zipcode<br>
+                <a href="/CA1-Group13/api/person/zipcode/0900" target="_blank">/CA1-Group13/api/person/zipcode/0900</a><br>
+                Method: GET <br>
+                Required: zipcode = [String]<br>
+                Success response: code 200<br>
+                Content example:<br>
+                <code>
+                    [
+                    {
+                    "firstName": "Henning",
+                    "lastName": "Primdahl",
+                    "email": "sko@sko.dk",
+                    "phones": [
+                    {
+                    "phoneNumber": "22334455",
+                    "description": "Home Phone"
+                    },
+                    {
+                    "phoneNumber": "33445566",
+                    "description": "Mobile"
+                    }
+                    ],
+                    "street": "hestegade",
+                    "additionalInfo": "3.stv",
+                    "zipcode": "0900",
+                    "city": "København C"
+                    } 
+                    ]
+                </code><br>
+                Error response: code 404<br>
+                content:<br>
+                <code>
+                    {
+                    "code": 404,
+                    "message": "No persons at zipcode",
+                    "description": "No persons at zipcode"
+                    }
+                </code>
 
-                <h2>Who Did What:</h2>
+            </p>
+            <hr/>
+            <h3>
+                Add a person.
+            </h3>                            
+            <p>
+                URL: person<br>
+                Method: POST <br>
+                Required content json:<br>
+                <code>
+                    {
+                    "firstName": "Knud",
+                    "lastName": "Jensen",
+                    "email": "addcd@adc.dk",
+                    "phones": [
+                    {
+                    "phoneNumber": "43448822",
+                    "description": "Home Phone"
+                    }
+                    ],
+                    "street": "Lalgade 15",
+                    "additionalInfo": "4.stv",
+                    "zipcode": "0900",
+                    "city": "København C"
+                    }
+                </code><br>
+                Success response: code 201 created<br>
+                Content example:
+                <code>
+                    {
+                    "firstName": "Knud",
+                    "lastName": "Jensen",
+                    "email": "addcd@adc.dk",
+                    "phones": [
+                    {
+                    "phoneNumber": "43448822",
+                    "description": "Home Phone"
+                    }
+                    ],
+                    "street": "Lalgade 15",
+                    "additionalInfo": "4.stv",
+                    "zipcode": "0900",
+                    "city": "København C"
+                    }
+                </code><br>
+                Error response: code 409 conflict <br>
+                content:<br>
+                <code>
+                    {"code": 409,
+                    "message": "Email already exists!",
+                    "description": "Email already exists!"}
 
-                <h2>FeedBack</h2>
-                <p>På vegne af gruppe 13 (John, Murched & Lasse) vil vi give lidt feedback på flow 1.
-                    Vi syntes alle at der har været alt for meget nyt, i et tempo der måske godt kunne skrues lidt ned. Det er selvfølgelig godt at blive bombet med emner og opgaver hvis man kan gabe over det,
-                    men i denne omgang har det måske lige været for stor en mundfuld. Udover det har der været noget bedre struktur i undervisningen end på 2.semester, og det har været rigtig godt.
-                    Vi syntes også at det er et godt koncept med at få opgaver til ugens dage så man kan få fingerene på tasterne, også endnu bedre at man om fredagen har massere af mulighed for at få hjælp.
-                    Det koncept skal i holde fast i, og bestemt også morgenmaden om fredagen.</p>
+                </code><br>
+                <code>
+                    {"code": 409,
+                    "message": "Phonenumber already exists",
+                    "description": "Phonenumber already exists"}
+                </code><br>
+                <code>
+                    {"code": 409,
+                    "message": "Zipcode does not exist in the Kingdom of Denmark.",
+                    "description": "Zipcode does not exist in the Kingdom of Denmark."}
+                </code>
+            </p>
+            <hr/>            
+            <h3>
+                Edit a person.
+            </h3>                            
+            <p>
+                URL: person/complete/phoneNumber<br>                
+                Method: PUT <br>
+                Required: phoneNumber = [Long]<br>
+                Required content json:<br>
+                <code>
+                    {
+                    "firstName": "Knud",
+                    "lastName": "Jensen",
+                    "email": "addcd@adc.dk",
+                    "phones": [
+                    {
+                    "phoneNumber": "43448822",
+                    "description": "Home Phone"
+                    }
+                    ],
+                    "street": "Lalgade 15",
+                    "additionalInfo": "4.stv",
+                    "zipcode": "0900",
+                    "city": "København C"
+                    }
+                </code><br>
+                Success response: code 201 created<br>
+                Content example:
+                <code>
+                    {
+                    "firstName": "Knud",
+                    "lastName": "Jensen",
+                    "email": "addcd@adc.dk",
+                    "phones": [
+                    {
+                    "phoneNumber": "43448822",
+                    "description": "Home Phone"
+                    }
+                    ],
+                    "street": "Lalgade 15",
+                    "additionalInfo": "4.stv",
+                    "zipcode": "0900",
+                    "city": "København C"
+                    }
+                </code><br>
+                Error response: code 404 Not found, code 409 conflict <br>
+                content:<br>
+                <code>
+                    { "code": 404,
+                    "message": "Person not found",
+                    "description": "Person does not exist!"}                  
+                </code><br>  
+                <code>
+                    {
+                    "code": 409,
+                    "message": "There need to be at least one phone number",
+                    "description": "No phone numbers"
+                    }
+                </code>
+            </p>
+            <hr/>
 
-            </div>
+            <h3>
+                Delete a Person.
+            </h3>                            
+            <p>
+                URL: person/complete/phoneNumber<br>                
+                Method: DELETE <br>
+                Required: phoneNumber = [Long]<br>
+                Required content json:<br>
+                <code>
+                    {
+                    "firstName": "Knud",
+                    "lastName": "Jensen",
+                    "email": "addcd@adc.dk",
+                    "phones": [
+                    {
+                    "phoneNumber": "43448822",
+                    "description": "Home Phone"
+                    }
+                    ],
+                    "street": "Lalgade 15",
+                    "additionalInfo": "4.stv",
+                    "zipcode": "0900",
+                    "city": "København C"
+                    }
+                </code><br>
+                Success response: code 200 ok<br>
+                Content example:
+                <code>
+                    {
+                    "firstName": "Knud",
+                    "lastName": "Jensen",
+                    "email": "addcd@adc.dk",
+                    "phones": [
+                    {
+                    "phoneNumber": "43448822",
+                    "description": "Home Phone"
+                    }
+                    ],
+                    "street": "Lalgade 15",
+                    "additionalInfo": "4.stv",
+                    "zipcode": "0900",
+                    "city": "København C"
+                    }
+                </code><br>
+                Error response: code 404 Not found<br>
+                content:<br>
+                <code>
+                    { "code": 404,
+                    "message": "Person not found",
+                    "description": "Person does not exist!"}                  
+                </code>
+
+            </p>
+            <hr/>
+
+            <h3>
+                Get all companies.
+            </h3>            
+            <p>
+                URL: person/complete/<br>
+                <a href="/CA1-Group13/api/company/complete/" target="_blank">/CA1-Group13/api/company/complete/</a><br>
+                Method: GET <br>
+                Success response: code 200<br>
+                Content example:<br>
+                <code>
+                    [
+                    {
+                    "cvr": 10000001,
+                    "name": "PælsCO",
+                    "email": "paelsmager@paels.dk",
+                    "desc": "Sælger flotte pælse",
+                    "streetInfo": "10",
+                    "street": "Firmagaden",
+                    "city": "Høje Taastrup",
+                    "zipCode": "0800",
+                    "phones": [
+                    {
+                    "phoneNumber": "88887766",
+                    "description": "HR"
+                    },
+                    {
+                    "phoneNumber": "99887766",
+                    "description": "Sales"
+                    }
+                    ],
+                    "mValue": 214251,
+                    "numbEmp": 40
+                    } ]
+                </code><br>
+                Error response: code 404<br>
+                content:<br>
+                <code>
+                    {
+                    "code": 404,
+                    "message": "No companies exists at all",
+                    "description": "No companies exists at all!" 
+                    }
+                </code>
+            </p>
+            <hr>
+            <h3>
+                Get specific company with cvr.
+            </h3>            
+            <p>
+                URL: person/complete/cvr<br>
+                <a href="/CA1-Group13/api/company/complete/10000001" target="_blank">/CA1-Group13/api/company/complete/10000001</a><br>
+                Method: GET <br>
+                Required: cvr = [Long]<br>
+                Success response: code 200<br>
+                Content example:<br>
+                <code>
+                    {
+                    "cvr": 10000001,
+                    "name": "PælsCO",
+                    "email": "paelsmager@paels.dk",
+                    "desc": "Sælger flotte pælse",
+                    "streetInfo": "10",
+                    "street": "Firmagaden",
+                    "city": "Høje Taastrup",
+                    "zipCode": "0800",
+                    "phones": [
+                    {
+                    "phoneNumber": "88887766",
+                    "description": "HR"
+                    },
+                    {
+                    "phoneNumber": "99887766",
+                    "description": "Sales"
+                    }
+                    ],
+                    "mValue": 214251,
+                    "numbEmp": 40
+                    } 
+                </code><br>
+                Error response: code 404<br>
+                content:<br>
+                <code>
+                    {
+                    "code": 404,
+                    "message": "No companies exists at all",
+                    "description": "No companies exists at all!" 
+                    }
+                </code>
+
+
+            </p>
+            <hr>
+
+            <h3>
+                Get all zipcodes
+            </h3>            
+            <p>
+                URL: zipcode<br>
+                <a href="/CA1-Group13/api/zipcode" target="_blank">/CA1-Group13/api/zipcode</a><br>
+                Method: GET <br>
+                Success response: code 200<br>
+                Content example:<br>
+                <code>
+                    [
+                    {
+                    "zipcode": "0555",
+                    "city": "Scanning"
+                    }
+                    ]
+                </code><br>
+                Error response: code 404<br>
+                content:<br>
+                <code>
+                    {
+                    "code": 404,
+                    "message": "No zipcodes exists at all",
+                    "description": "No zipcodes exists at all" 
+                    }
+                </code>
+
+
+            </p>
+            <hr>
+
+
+            <h2>Test:</h2>
+            <p>We tested our system by using postman, Junit and rest assured Testing, where by junit we tested one of our facades and with the rest assured test we tested our API (person resources).<p>
+            <h2>Inheritance Strategy:</h2>
+            <p>The Strategy of our inheritance: The Person and Company classes inherit from InfoEntity, so Person and Company will extend the id and email attribute from the InfoEntity class, which they have in common.<br>
+                We have made the InfoEntity class as a abstract class. By using an abstract class, we make it impossible to instantiate a new InfoEntity without instantiating either a Person or Company class. This can be helpful because of the Descrimator type.
+            </p>
+            <hr/>            
+            <h2>Who Did What:</h2>
+            <ul>
+                <li>
+                    Murched Kayed: Java, REST, JavaScript, JUNIT, CSS
+                </li>
+                <li>
+                    Lasse Hougaard Andersen: Java, JPA, REST, JavaScript, JUNIT
+                </li>
+                <li>
+                    John David Bloch Hansen: Java, JPA, REST, JavaScript, SQL
+                </li>
+            </ul>
+            <hr>
+            <h2>FeedBack</h2>
+            <p>På vegne af gruppe 13 (John, Murched & Lasse) vil vi give lidt feedback på flow 1.
+                Vi syntes alle at der har været alt for meget nyt, i et tempo der måske godt kunne skrues lidt ned. Det er selvfølgelig godt at blive bombet med emner og opgaver hvis man kan gabe over det,
+                men i denne omgang har det måske lige været for stor en mundfuld. Udover det har der været noget bedre struktur i undervisningen end på 2.semester, og det har været rigtig godt.
+                Vi syntes også at det er et godt koncept med at få opgaver til ugens dage så man kan få fingerene på tasterne, også endnu bedre at man om fredagen har massere af mulighed for at få hjælp.
+                Det koncept skal i holde fast i, og bestemt også morgenmaden om fredagen.
+            </p>
+
+
 
         </div>
     </body>

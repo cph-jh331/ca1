@@ -10,12 +10,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author bloch
  */
 @Entity
+@Table(name = "company")
 @NamedQueries(
         {
             @NamedQuery(name = "Company.findAllCompanies", query = "SELECT c FROM Company c")

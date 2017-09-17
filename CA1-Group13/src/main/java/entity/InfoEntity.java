@@ -18,12 +18,14 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author bloch
  */
 @Entity
+@Table(name = "infoentity")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class InfoEntity implements Serializable {
 
@@ -32,7 +34,7 @@ public abstract class InfoEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)    
+    @Column(unique = true)
     private String email;
 
     @OneToMany(mappedBy = "infoEntity", cascade = CascadeType.ALL)

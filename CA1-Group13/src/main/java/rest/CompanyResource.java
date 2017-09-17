@@ -2,6 +2,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import deploy.DeployConfig;
 import entity.Company;
 import entityFacades.CompanyFacade;
 import exceptions.CompanyNotFoundException;
@@ -10,11 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -32,7 +31,7 @@ public class CompanyResource {
 
     public CompanyResource()
     {
-        cf = new CompanyFacade(Persistence.createEntityManagerFactory("devPU"));
+        cf = new CompanyFacade(Persistence.createEntityManagerFactory(DeployConfig.PU_NAME));
     }
 
     @GET
@@ -73,11 +72,5 @@ public class CompanyResource {
                 .status(200)
                 .entity(gson.toJson(cdList))
                 .build();
-    }
-
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content)
-    {
     }
 }

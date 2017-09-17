@@ -7,8 +7,10 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import deploy.DeployConfig;
 import entity.CityInfo;
 import entityFacades.CityInfoFacade;
+import exceptions.NoCityInfoException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Persistence;
@@ -40,7 +42,7 @@ public class ZipcodeResource {
      */
     public ZipcodeResource()
     {
-        cif = new CityInfoFacade(Persistence.createEntityManagerFactory("devPU"));
+        cif = new CityInfoFacade(Persistence.createEntityManagerFactory(DeployConfig.PU_NAME));
     }
 
     @GET
@@ -48,6 +50,10 @@ public class ZipcodeResource {
     public Response getAllZipcodes()
     {
         List<CityInfo> ciList = cif.getAllCityInfos();
+        if (ciList.isEmpty())
+        {
+            throw new NoCityInfoException();
+        }
         List<CityInfoDetail> cidList = new ArrayList<>();
         for (CityInfo cityInfo : ciList)
         {

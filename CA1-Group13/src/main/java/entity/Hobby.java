@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="hobby")
 @NamedQueries(
         {
             @NamedQuery(name = "Hobby.findAllHobbies", query = "SELECT h FROM Hobby h")

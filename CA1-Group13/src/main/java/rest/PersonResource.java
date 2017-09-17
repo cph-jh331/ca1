@@ -7,13 +7,16 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import deploy.DeployConfig;
 import entity.Address;
+import entity.InfoEntity;
 import entity.Person;
 import entity.Phone;
 import entityFacades.AddressFacade;
 import entityFacades.CityInfoFacade;
 import entityFacades.PersonFacade;
 import entityFacades.PhoneFacade;
+import exceptions.CityInfoDoesNotExistException;
 import exceptions.EmailAlreadyExistsException;
 import exceptions.NoPersonsAtZipcodeException;
 import exceptions.NoPhoneNumbersFoundException;
@@ -62,7 +65,7 @@ public class PersonResource {
      */
     public PersonResource()
     {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("devPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeployConfig.PU_NAME);
         this.pf = new PersonFacade(emf);
         this.cityFac = new CityInfoFacade(emf);
         this.af = new AddressFacade(emf);
@@ -123,6 +126,11 @@ public class PersonResource {
             throw new EmailAlreadyExistsException();
         }
 
+        if (pd.getZipcode() == null || cityFac.getCityInfo(pd.getZipcode()) == null)
+        {
+            throw new CityInfoDoesNotExistException();
+        }
+
         //checking if the phoneNumber already exists, since our phone can only
         //have a single person, but a person can have many.
         List<PhoneDetail> pdPhoneList = pd.getPhones();
@@ -134,6 +142,10 @@ public class PersonResource {
 
         for (PhoneDetail phoneDetail : pdPhoneList)
         {
+            if (phoneDetail.getPhoneNumber().length() > 8 || phoneDetail.getPhoneNumber().length() < 8)
+            {
+                throw new PhoneNumberNotANumberException();
+            }
             Long phoneNumber;
             try
             {
@@ -155,7 +167,6 @@ public class PersonResource {
         p = new Person(pd.getFirstName(), pd.getLastName(), pd.getEmail());
         p = pf.addPerson(p);
 
-        List<Phone> phoneList = new ArrayList<>();
         for (PhoneDetail phoneDetail : pdPhoneList)
         {
             Phone phone = new Phone(phoneDetail.getPhoneNumber(), phoneDetail.getDescription(), p);
@@ -186,11 +197,11 @@ public class PersonResource {
     }
 
     @DELETE
-    @Path("{id}")
+    @Path("complete/{phoneNumber}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deletePerson(@PathParam("id") int id)
+    public Response deletePerson(@PathParam("phoneNumber") long phoneNumber)
     {
-        Person p = pf.getPerson(id);
+        Person p = pf.getPerson(phoneNumber);
         if (p == null)
         {
             throw new PersonNotFoundException();
@@ -204,15 +215,25 @@ public class PersonResource {
     }
 
     @PUT
+    @Path("complete/{phoneNumber}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updatePerson(String entity)
+    public Response updatePerson(@PathParam("phoneNumber") long phoneNumber, String entity)
     {
         PersonDetail pd = gson.fromJson(entity, PersonDetail.class);
-        Person p = pf.getByEmail(pd.getEmail());
+        Person p = pf.getPerson(phoneNumber);
         if (p == null)
         {
             throw new PersonNotFoundException();
+        }
+        if (pd.getPhones() == null)
+        {
+            throw new NoPhoneNumbersFoundException();
+        }
+
+        if (pd.getZipcode() == null || cityFac.getCityInfo(pd.getZipcode()) == null)
+        {
+            throw new CityInfoDoesNotExistException();
         }
 
         Person pEdited = pd.convertToPerson();
@@ -232,11 +253,15 @@ public class PersonResource {
             adr = af.editAddress(adr);
         }
 
+        List<Phone> pPhones = p.getPhones();
+        for (Phone pPhone : pPhones)
+        {
+            phFac.deletePhone(pPhone.getNumber());
+        }
+
         pEdited.setAddress(adr);
 
         p = pf.editPerson(pEdited);
-
-        System.out.println(p.getFirstName());
 
         pd = new PersonDetail(p);
         return Response.status(201).entity(gson.toJson(pd)).build();

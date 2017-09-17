@@ -6,22 +6,23 @@
 package entity;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author bloch
  */
 @Entity
+@Table(name = "phone")
 @NamedQueries(
         {
             @NamedQuery(name = "Phone.findAllPhones", query = "SELECT p FROM Phone p")
-           
+
         })
 public class Phone implements Serializable {
 
@@ -43,8 +44,6 @@ public class Phone implements Serializable {
         this.description = description;
         this.infoEntity = infoEntity;
     }
-    
-    
 
     public InfoEntity getInfoEntity()
     {
@@ -75,7 +74,5 @@ public class Phone implements Serializable {
     {
         this.description = description;
     }
-
-   
 
 }

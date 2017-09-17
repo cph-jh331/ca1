@@ -14,12 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author bloch
  */
 @Entity
+@Table(name = "cityinfo")
 @NamedQueries(
         {
             @NamedQuery(name = "CityInfo.findAllCityInfo", query = "SELECT c FROM CityInfo c")

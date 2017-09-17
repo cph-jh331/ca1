@@ -21,10 +21,10 @@ public class NoPhoneNumbersFoundExceptionMapper implements ExceptionMapper<NoPho
     public Response toResponse(NoPhoneNumbersFoundException e)
     {
         boolean isDebug = context.getInitParameter("debug").equals("true");
-        ErrorMessage err = new ErrorMessage(e, 404, isDebug);
-        err.setDescription("No companies exists at all");
-        err.setMessage("No companies exists at all");
+        ErrorMessage err = new ErrorMessage(e, 409, isDebug);
+        err.setDescription("No phone numbers");
+        err.setMessage("There need to be at least one phone number");
 
-        return Response.status(404).entity(gson.toJson(err)).build();
+        return Response.status(409).entity(gson.toJson(err)).build();
     }
 }

@@ -25,7 +25,7 @@ public class CompanyNotFoundExceptionMapper implements ExceptionMapper<CompanyNo
 
         ErrorMessage err = new ErrorMessage(exception, 404, isDebug);
         err.setDescription("Company not found");
-        err.setMessage("Person not found");
+        err.setMessage("Company not found");
 
         return Response
                 .status(Response.Status.NOT_FOUND)

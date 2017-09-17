@@ -17,12 +17,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author bloch
  */
 @Entity
+@Table(name = "address")
 @NamedQueries(
         {
             @NamedQuery(name = "Address.findAllAddresses", query = "SELECT a FROM Address a")
